@@ -634,7 +634,7 @@ const CatalogPage = () => {
 
   return (
     <section>
-      <div className="container mx-auto">
+      <div className="mx-auto">
         <PagesNav items={items} />
 
         <CatalogSlider />
