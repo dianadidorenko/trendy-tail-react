@@ -554,7 +554,7 @@ const ProductDetailsPage = () => {
           <PagesNav items={items} itemName={name} />
         </div>
 
-        <div className="flex gap-10 py-8 xsSm:flex-col">
+        <div className="flex gap-10 py-8 sm:flex-col lg:flex-row">
           {/* images */}
           <Gallery productMedia={images} />
 
