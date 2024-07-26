@@ -6,7 +6,6 @@ import ProductDetails from "@/components/layout/product-details/ProductDetails";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
-
 const items = [
   {
     id: 1,
@@ -555,7 +554,7 @@ const ProductDetailsPage = () => {
           <PagesNav items={items} itemName={name} />
         </div>
 
-        <div className="flex gap-10 py-8">
+        <div className="flex gap-10 py-8 xsSm:flex-col">
           {/* images */}
           <Gallery productMedia={images} />
 

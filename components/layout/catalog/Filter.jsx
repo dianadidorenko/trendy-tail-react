@@ -28,7 +28,7 @@ const Filter = ({
   };
 
   return (
-    <div className="flex flex-col gap-y-4 w-[230px] border border-gray-200 p-2 rounded-[10px]">
+    <div className="flex flex-col gap-y-4 md:w-[210px] lg:w-[230px] border border-gray-200 p-2 rounded-[10px]">
       <div>
         <h2 className="font-bold text-[16px] italic border pl-3 border-slate-400 shadow-sm shadow-slate-50 rounded-full">
           Категорія:
@@ -161,7 +161,7 @@ const Filter = ({
 
       <div className="flex items-center justify-center">
         <button
-          className="px-4 py-2 bg-lightBlueColor text-white rounded"
+          className="px-4 py-2 bg-lightBlueColor text-white rounded xsSm:text-sm"
           onClick={resetFilters}
         >
           Сбросить фильтры

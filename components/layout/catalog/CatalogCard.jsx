@@ -19,11 +19,15 @@ const CatalogCard = ({ item }) => {
       </Link>
 
       <div className="flex flex-col items-center gap-2">
-        <p className="uppercase font-bold text-[13px]">{item.info[0].brand}</p>
-        <h3 className="text-xl">{item.name}</h3>
+        <p className="uppercase font-bold text-[13px] xsSm:text-md">
+          {item.info[0].brand}
+        </p>
+        <h3 className="text-xl sm:text-md xsSm:text-center">{item.name}</h3>
         <p className="flex items-baseline gap-1 text-redColor">
           <span className="">від</span>
-          <span className="font-bold text-2xl">{item.startingPrice}</span>
+          <span className="font-bold text-2xl xsSm:text-md">
+            {item.startingPrice}
+          </span>
           <span className="font-semibold">₴</span>
         </p>
       </div>
@@ -32,7 +36,7 @@ const CatalogCard = ({ item }) => {
         {item?.sizes.length > 0 &&
           item.sizes.map((size) => (
             <div key={size}>
-              <p className="text-lg">{size}</p>
+              <p className="text-lg xsSm:text-sm">{size}</p>
             </div>
           ))}
       </div>
@@ -41,7 +45,7 @@ const CatalogCard = ({ item }) => {
         <Link href={`/${item.urlName}`}>
           <CustomButton
             text={"Перейти"}
-            containerStyles={"w-[150px] h-[45px] text-[15px]"}
+            containerStyles={"w-[150px] h-[45px] text-[15px] xsSm:w-[100px]"}
           />
         </Link>
       </div>
