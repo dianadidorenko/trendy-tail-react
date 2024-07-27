@@ -54,7 +54,7 @@ export default function WelcomeTitle() {
               viewport={{ once: true, amount: 0.2 }}
             >
               <Link
-                href={"/catalogue"}
+                href={"/catalog"}
                 variants={fadeIn("up", 0.8)}
                 initial="hidden"
                 whileInView={"show"}
