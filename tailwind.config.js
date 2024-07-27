@@ -9,13 +9,13 @@ module.exports = {
   ],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "50px",
+    listStyleType: {
+      square: "square",
     },
     screens: {
       xs: "320px",
-      xsSm: "460px",
+      xs2: '350px',
+      xsSm: "450px",
       sm: "640px",
       md: "768px",
       lg: "1024px",

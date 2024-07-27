@@ -5,13 +5,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 
-import Button from "@/components/elements/Button";
+import CustomButton from "@/components/elements/Button";
 
 export default function WelcomeTitle() {
   return (
     <section>
       <div className="container mx-auto">
-        <div className="flex items-center justify-center text-center py-[70px] xs:py-[50px] xs:flex-col sm:flex-row gap-8">
+        <div className="flex items-center justify-center text-center py-[70px] xs:py-[50px] xs:flex-col md:flex-row xs:gap-8 md:gap-0">
           <motion.div
             className="flex"
             variants={fadeIn("right", 0.2)}
@@ -27,9 +27,9 @@ export default function WelcomeTitle() {
               className="xs:max-w-[180px] lg:max-w-[250px] md:max-w-[200px]"
             />
           </motion.div>
-          <div className="welcome-title xsSm:w-[470px] xs:w-[300px] xl:w-[690px] sm:max-w-none">
+          <div className="welcome-title xs:max-w-[350px] lg:max-w-[360px] sm:max-w-none">
             <motion.h1
-              className="text-lightBlueColor font-orelegaOne pb-3 sm:text-[30px] xs:text-[26px] md:text-[25px] xl:text-[40px]"
+              className="text-lightBlueColor font-orelegaOne pb-3 text-[20px]"
               variants={fadeIn("up", 0.4)}
               initial="hidden"
               whileInView={"show"}
@@ -38,7 +38,7 @@ export default function WelcomeTitle() {
               Якісні зоотовари від виробника для ваших улюбленців
             </motion.h1>
             <motion.h2
-              className="max-w-[470px] mx-auto pb-[30px] xs:pb-[20px] xs:text-[16px] text-[18px] text-gray-800 dark:text-white"
+              className="max-w-[370px] mx-auto pb-[30px] xs:pb-[20px] text-[14px] text-primary dark:text-white"
               variants={fadeIn("up", 0.8)}
               initial="hidden"
               whileInView={"show"}
@@ -60,7 +60,10 @@ export default function WelcomeTitle() {
                 whileInView={"show"}
                 viewport={{ once: true, amount: 0.2 }}
               >
-                <Button text="Каталог" containerStyles="w-[150px] h-[45px]" />
+                <CustomButton
+                  text="Каталог"
+                  containerStyles="w-[150px] h-[45px]"
+                />
               </Link>
             </motion.div>
           </div>

@@ -52,7 +52,7 @@ const CatalogSlider = () => {
         >
           {CatalogSliderData.map((picture, index) => (
             <SwiperSlide key={index}>
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center max-h-[550px]">
                 <Image
                   src={picture.imgPath}
                   width={1000}
@@ -60,7 +60,7 @@ const CatalogSlider = () => {
                   alt="pic"
                   className="rounded-[20px]"
                 />
-                <h2 className="absolute text-4xl uppercase p-10 border border-gray-400 text-white bg-zinc-600/70 shadow-slate-200 shadow-lg rounded-[10px]">
+                <h2 className="absolute text-md md:text-lg lg:text-4xl uppercase p-4 md:p-6 lg:p-10 border border-gray-400 text-white bg-zinc-600/70 shadow-slate-200 shadow-lg rounded-[10px]">
                   Нова Колекція
                 </h2>
               </div>

@@ -7,7 +7,7 @@ const PagesNav = ({ items }) => {
   const itemName = items.find((item) => path.productId === item.urlName);
 
   return (
-    <div className="flex items-center gap-1 py-6">
+    <div className="flex items-center gap-1 py-2">
       <Link href="/">
         <div className="text-primary/50 flex items-center dark:text-white/50">
           <p>Головна</p>
@@ -19,7 +19,7 @@ const PagesNav = ({ items }) => {
       </Link>
 
       {itemName?.name ? (
-        <div className="flex items-center gap-1 py-6">
+        <div className="flex items-center gap-1">
           <Link href="/catalog">
             <p
               className={`${

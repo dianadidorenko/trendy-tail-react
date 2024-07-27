@@ -37,7 +37,7 @@ const MainSlider = () => {
   return (
     <section>
       <motion.div
-        className="container mx-auto xl:max-w-[1000px] pt-[70px] xs:pt-[50px] xs:px-[20px]"
+        className="container mx-auto xl:max-w-[1000px] py-[70px] xs:py-[50px]"
         variants={fadeIn("up", 0.2)}
         initial="hidden"
         whileInView={"show"}
@@ -46,17 +46,7 @@ const MainSlider = () => {
         <Swiper
           className=""
           slidesPerView={1}
-          breakpoints={{
-            320: {
-              slidesPerView: 1,
-            },
-            640: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 1,
-            },
-          }}
+          breakpoints={{}}
           spaceBetween={30}
           //   autoplay={true}
           modules={[Autoplay]}

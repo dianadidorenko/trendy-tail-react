@@ -7,11 +7,11 @@ import { CartContext } from "@/lib/context/CartContext";
 const icons = [
   {
     path: "/",
-    name: <Search />,
+    name: <Search size={20} />,
   },
   {
     path: "/",
-    name: <UserRound />,
+    name: <UserRound size={20} />,
   },
   {
     path: "",
@@ -25,14 +25,17 @@ const SettingsHeader = ({ containerStyles, linkStyles }) => {
     <div className={`${containerStyles}`}>
       {icons.map((icon, index) => (
         <Link href={icon.path} key={index} className={`${linkStyles}`}>
-          <div className={'w-[25px] h-[25px]'}>{icon.name}</div>
+          <div>{icon.name}</div>
         </Link>
       ))}
 
       <Link href={"/cart"} className={`flex gap-2`}>
-        <ShoppingBag />
+        <ShoppingBag
+          size={20}
+          className="hover:text-orangeColor transition-all hover:dark:text-darkBlueColor"
+        />
         {itemAmount > 0 && (
-          <span className="absolute right-4 top-4 bg-white border-2 border-darkBlueColor py-[1px] px-[6px] rounded-full text-primary text-[12px] transition-all">
+          <span className="absolute right-5 top-4 bg-white border-2 border-darkBlueColor py-[1px] px-[6px] rounded-full text-primary text-[12px] transition-all">
             {itemAmount}
           </span>
         )}

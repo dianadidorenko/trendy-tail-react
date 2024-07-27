@@ -8,7 +8,7 @@ const Gallery = ({ productMedia, itemName }) => {
   const [mainImage, setMainImage] = useState(productMedia[0]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col xs:items-center">
       <div className="flex flex-col gap-3 max-w-[410px]">
         <Image
           src={mainImage}
@@ -16,7 +16,7 @@ const Gallery = ({ productMedia, itemName }) => {
           height={500}
           objectFit="cover"
           alt={`${itemName}`}
-          className="max-w-[500px] rounded-lg shadow-xl object-cover"
+          className="max-w-[500px] xs:w-[250px] xsSm:w-[300px] sm:w-[410px] rounded-lg shadow-xl object-cover border border-gray-400/20"
         />
         <div className="flex gap-2 overflow-auto tailwind-scrollbar-hide">
           {productMedia.map((image, index) => (
@@ -27,7 +27,7 @@ const Gallery = ({ productMedia, itemName }) => {
               height={130}
               objectFit="cover"
               alt={`${itemName}`}
-              className={`rounded-lg object-cover cursor-pointer ${
+              className={`xs:w-[77px] xsSm:w-[95px] sm:w-[130px] rounded-lg object-cover cursor-pointer ${
                 mainImage === image ? "border-2 border-primary/40" : ""
               }`}
               onClick={() => setMainImage(image)}

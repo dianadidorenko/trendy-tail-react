@@ -30,9 +30,9 @@ const InTrendsSlider = ({ items }) => {
     <section>
       <SectionHeaders mainHeader={"В тренді"} />
 
-      <div className="mx-auto relative">
+      <div className="container mx-auto relative">
         <Swiper
-          className="h-[450px] max-w-[1100px] mx-auto"
+          className="h-[470px] max-w-[1100px] mx-auto"
           slidesPerView={1}
           breakpoints={{
             640: {
@@ -50,20 +50,20 @@ const InTrendsSlider = ({ items }) => {
           modules={[Autoplay, Pagination]}
           pagination={{ clickable: true }}
         >
-          {items.slice(0, 4).map((item, index) => (
+          {items.slice(0, 6).map((item, index) => (
             <SwiperSlide className="px-2" key={index + "swiper"}>
-              <div className="max-w-[307px] mx-auto flex flex-col items-center justify-center gap-2 border border-gray-300 shadow-md dark:border-white p-6 rounded-[20px] hover:shadow-xl hover:dark:shadow-slate-600 hover:cursor-pointer transition-all duration-300">
+              <div className="max-w-[320px] text-center mx-auto flex flex-col items-center justify-center gap-2 border border-gray-300 shadow-md dark:border-white px-1 py-6 rounded-[20px] hover:shadow-xl hover:dark:shadow-slate-600 hover:cursor-pointer transition-all duration-300">
                 {item.images.slice(0, 1).map((image) => (
                   <Image
                     src={image}
-                    width={150}
-                    height={150}
+                    width={180}
+                    height={180}
                     alt={item.name}
                     key={item.name}
                     className="rounded-[20px] object-cover"
                   />
                 ))}
-                <h2 className="text-xl font-bold">{item.name}</h2>
+                <h2 className="text-[16px] font-bold">{item.name}</h2>
                 <div className="flex gap-2">
                   {item.sizes.map((size, index) => (
                     <em key={index + "size"} className="text-[14px]">

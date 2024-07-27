@@ -419,7 +419,7 @@ const items = [
     name: "Комбінезон Puzzle",
     urlName: "kombinezon-puzzle",
     category: "cloth",
-    categoryShow: "Комбінезони",
+    categoryShow: "Одяг",
     type: "Комбінезони",
     description:
       "Він створений спеціально для улюбленців, яким не сидиться вдома. Комбінезон зручний, не сковує рухи, відмінно прилягає до тіла і дуже теплий.",
@@ -634,18 +634,18 @@ const CatalogPage = () => {
 
   return (
     <section>
-      <div className="mx-auto">
+      <div className="container mx-auto">
         <PagesNav items={items} />
 
         <CatalogSlider />
 
         <SectionHeaders mainHeader={"Каталог"} />
 
-        <div className="flex flex-col justify-center gap-10 py-8 max-w-[1400px] mx-auto relative">
+        <div className="flex flex-col justify-center gap-10 xs:px-0 xs2:pb-8 px-8 mx-auto relative">
           {!items || items.length === 0 ? (
             <p>Не знайдено товар</p>
           ) : (
-            <div className="flex items-start gap-10 py-8 px-5">
+            <div className="flex items-start justify-between gap-4 sm:gap-10 py-8">
               <aside className="flex flex-col gap-4">
                 <Filter
                   items={items}

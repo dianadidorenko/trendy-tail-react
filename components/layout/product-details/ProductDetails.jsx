@@ -40,7 +40,7 @@ const ProductDetails = ({
   }, [selectedPrice, quantity]);
 
   return (
-    <div className="max-w-[850px] flex flex-col gap-4 px-2 font-poppins">
+    <div className="flex flex-col gap-4 px-2 font-poppins">
       <div className="flex flex-col">
         <h1 className="font-orelegaOne text-primary dark:text-white text-[22px]">
           {itemName.name}

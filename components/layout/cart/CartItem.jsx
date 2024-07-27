@@ -93,7 +93,7 @@ const CartItem = () => {
       <h2>Ваш кошик порожній :(</h2>
     </div>
   ) : (
-    <div className="cart-page">
+    <div className="cart-page pb-20">
       <div>
         <SectionHeaders mainHeader={"Замовлення"} />
         <div className="flex flex-col items-center justify-center mb-8">
@@ -120,7 +120,7 @@ const CartItem = () => {
         </div>
       </div>
 
-      <div className="flex gap-20 px-20 justify-center">
+      <div className="flex flex-col items-center sm:items-start sm:flex-row gap-10 lg:gap-20 px-5 lg:px-20 justify-center">
         <div className="flex flex-col max-w-[350px]">
           <h2 className="uppercase border-b-gray-400 border-b-2 pb-1 text-primary dark:text-white/80">
             Ваші дані
@@ -214,7 +214,7 @@ const CartItem = () => {
           </h2>
 
           <div className="pay-block text-primary flex gap-2">
-            <input type="radio" defaultChecked />
+            <input type="checkbox" defaultChecked />
             <label className="text-[14px] dark:text-white/80">Післяплата</label>
             <p className="text-gray-400 text-[12px] dark:text-white/80">
               Оплата при отримуванні
@@ -222,7 +222,7 @@ const CartItem = () => {
           </div>
 
           <div className="pay-block text-primary flex gap-2">
-            <input type="radio" />
+            <input type="checkbox" />
             <label className="text-[14px] dark:text-white/80">
               Я згоден з умовами угоди користувача.
             </label>
@@ -230,10 +230,10 @@ const CartItem = () => {
 
           <button
             type="submit"
-            className="mt-4 order-button flex items-center justify-center gap-2 text-xl max-w-[300px]"
+            className="mt-4 order-button flex items-center justify-center gap-2 text-base max-w-[300px]"
           >
             Сплатити
-            <span> ₴</span>
+            <span>{cartTotal} ₴</span>
           </button>
         </div>
 
@@ -243,7 +243,7 @@ const CartItem = () => {
           </h2>
           {cart.map((cartItem, index) => (
             <div
-              className="flex gap-3 border-2 p-6 border-gray-200 order-block relative shadow-xl dark:shadow-white/30"
+              className="flex gap-3 border-2 px-12 py-2 md:px-6 md:py-6 border-gray-200 order-block relative shadow-xl dark:shadow-white/30"
               key={index}
             >
               <HiTrash
@@ -258,11 +258,7 @@ const CartItem = () => {
                 width={150}
                 height={150}
                 alt="Товар"
-                className="rounded-[10px]"
-              />
-              <PawPrint
-                size="30"
-                className="text-orangeColor border border-[#ffa95c] rounded-full p-1"
+                className="w-[100px] md:w-[150px] rounded-[10px]"
               />
 
               <div>
@@ -309,7 +305,7 @@ const CartItem = () => {
             {`${itemAmount} ${
               itemAmount > 1
                 ? itemAmount === 2 || itemAmount === 3
-                  ? "товари "
+                  ? "товара "
                   : "товарів "
                 : "товар "
             }`}
