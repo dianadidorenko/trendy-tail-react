@@ -1,11 +1,12 @@
 import { Orelega_One, Poppins } from "next/font/google";
 
-import "./globals.css";
+import "../globals.css";
 
-import Header from "../components/common/Header";
-import { ThemeProvider } from "../components/ThemeProvider";
+import Header from "../../components/common/Header";
+import { ThemeProvider } from "../../components/ThemeProvider";
 import CartProvider from "@/lib/context/CartContext";
 import Footer from "@/components/common/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const popins = Poppins({
   subsets: ["latin"],
@@ -32,9 +33,11 @@ export default function RootLayout({ children }) {
           className={`${popins.className} ${orelegaOne.className} font-poppins`}
         >
           <ThemeProvider attribute="class" defaultTheme="light">
-            <Header />
-            {children}
-            <Footer />
+            <ClerkProvider>
+              <Header />
+              {children}
+              <Footer />
+            </ClerkProvider>
           </ThemeProvider>
         </body>
       </html>

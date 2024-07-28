@@ -1,10 +1,10 @@
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AlignJustify } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 import Nav from "./Nav";
 import Socials from "./Socials";
+import { Sheet, SheetTrigger, SheetContent } from "../ui/sheet";
 
 const MobileNav = () => {
   return (

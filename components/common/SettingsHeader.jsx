@@ -1,17 +1,14 @@
-import { Search, ShoppingBag, UserRound } from "lucide-react";
+import { Search, ShoppingBag, UserRound, UserRoundCheck } from "lucide-react";
 import Link from "next/link";
 import ThemeToggler from "../ThemeToggler";
 import { useContext } from "react";
 import { CartContext } from "@/lib/context/CartContext";
+import { useUser } from "@clerk/nextjs";
 
 const icons = [
   {
     path: "/",
     name: <Search size={20} />,
-  },
-  {
-    path: "/",
-    name: <UserRound size={20} />,
   },
   {
     path: "",
@@ -21,6 +18,8 @@ const icons = [
 
 const SettingsHeader = ({ containerStyles, linkStyles }) => {
   const { itemAmount } = useContext(CartContext);
+  const { user } = useUser();
+
   return (
     <div className={`${containerStyles}`}>
       {icons.map((icon, index) => (
@@ -28,6 +27,16 @@ const SettingsHeader = ({ containerStyles, linkStyles }) => {
           <div>{icon.name}</div>
         </Link>
       ))}
+
+      {!user ? (
+        <Link href={"/sign-in"} className={`${linkStyles}`}>
+          <UserRound size={20} />
+        </Link>
+      ) : (
+        <Link href={"/profile"} className={`${linkStyles}`}>
+          <UserRoundCheck size={20} />
+        </Link>
+      )}
 
       <Link href={"/cart"} className={`flex gap-2`}>
         <ShoppingBag

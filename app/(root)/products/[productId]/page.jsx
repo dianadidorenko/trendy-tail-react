@@ -6,6 +6,7 @@ import ProductDetails from "@/components/layout/product-details/ProductDetails";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
+
 const items = [
   {
     id: 1,
@@ -527,11 +528,13 @@ const items = [
 const ProductDetailsPage = () => {
   const path = useParams();
 
-  const itemName = items.find((item) => {
-    if (path.productId === item.urlName) {
-      return item;
-    }
-  });
+  console.log(path);
+
+  const item = items.find((item) => item.urlName === path.productId);
+
+  if (!item) {
+    return <div>Продукт не найден</div>;
+  }
 
   const {
     id,
@@ -545,9 +548,7 @@ const ProductDetailsPage = () => {
     сharacteristics,
     material,
     careInstructions,
-  } = itemName;
-
-  console.log(id);
+  } = item;
 
   return (
     <section>
@@ -555,12 +556,10 @@ const ProductDetailsPage = () => {
         <PagesNav items={items} itemName={name} />
 
         <div className="flex gap-10 py-6 flex-col lg:flex-row">
-          {/* images */}
           <Gallery productMedia={images} />
 
-          {/* text */}
           <ProductDetails
-            itemName={itemName}
+            itemName={item}
             productInfo={info}
             productSize={sizes}
             productPrices={prices}
@@ -571,7 +570,6 @@ const ProductDetailsPage = () => {
           />
         </div>
 
-        {/* care & advantageds & material block */}
         <div>
           <Image
             src="/catalogue-detail-item/paws.png"
@@ -638,7 +636,6 @@ const ProductDetailsPage = () => {
           </div>
         </div>
 
-        {/* sizes table set open */}
         {category === "cloth" && (
           <div
             id="sizes"

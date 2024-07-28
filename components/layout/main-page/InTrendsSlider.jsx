@@ -79,7 +79,7 @@ const InTrendsSlider = ({ items }) => {
                   ₴
                 </p>
 
-                <Link href={`/${item.urlName}`}>
+                <Link href={`/products/${item.urlName}`}>
                   <Button
                     text={"Перейти"}
                     containerStyles={"w-[120px] h-[45px]"}

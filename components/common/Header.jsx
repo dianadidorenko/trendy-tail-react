@@ -32,7 +32,7 @@ export default function Header() {
         {/* dekstop menu */}
         <Nav
           containerStyles="hidden md:flex items-center flex gap-10 max-[1024px]:gap-5 font-orelegaOne"
-          linkStyles="relative text-primary dark:text-white/80 transition-all hover:text-orangeColor hover:dark:text-orangeColor"
+          linkStyles="relative text-primary dark:text-white/80 transition-all hover:text-orangeColor hover:dark:text-orangeColor text-[12px] md:text-[14px] lg:text-base"
           underlineStyles="absolute left-0 top-full h-[2px] bg-orangeColor w-full"
         />
 

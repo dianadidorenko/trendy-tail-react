@@ -83,7 +83,12 @@
 .container {
   padding: 0 50px;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 460px) {
   .container {
     padding: 0 10px;
   }
@@ -121,36 +126,6 @@
 /* MAIN PAGE - WELCOME TITLE */
 
 /* CATALOG PAGE */
-
-/* .catalog-item-btn {
-  background: #218287;
-  border: none;
-  z-index: 1;
-}
-.catalog-item-btn:after {
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 100%;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  background-color: #d45a57;
-  border-radius: 5px;
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-.catalog-item-btn:hover {
-  color: #fff;
-}
-.catalog-item-btn:hover:after {
-  left: 0;
-  width: 100%;
-}
-.catalog-item-btn:active {
-  top: 2px;
-} */
 
 .catalogue-item {
   display: flex;
@@ -557,3 +532,12 @@ footer input::placeholder {
 }
 
 /* FOOTER */
+
+/* PROFILE PAGE */
+
+.profile-form input {
+  min-width: 250px;
+  @apply border border-gray-400/40 rounded-md p-1 outline-none;
+}
+
+/* PROFILE PAGE */

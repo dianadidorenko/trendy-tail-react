@@ -59,7 +59,7 @@ const CatalogCard = ({ item }) => {
       </div>
 
       <div className="relative pt-2">
-        <Link href={`/${item.urlName}`}>
+        <Link href={`/products/${item.urlName}`}>
           <CustomButton
             text={"Перейти"}
             containerStyles={

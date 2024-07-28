@@ -1,9 +1,9 @@
 "use client";
 
-import PagesNav from "@/components/common/PagesNav";
-import SectionHeaders from "@/components/common/SectionHeaders";
+// import PagesNav from "@/components/common/PagesNav";
+// import SectionHeaders from "@/components/common/SectionHeaders";
 import CatalogCard from "@/components/layout/catalog/CatalogCard";
-import CatalogSlider from "@/components/layout/catalog/CatalogSlider";
+// import CatalogSlider from "@/components/layout/catalog/CatalogSlider";
 import Filter from "@/components/layout/catalog/Filter";
 import { useMemo, useState } from "react";
 
@@ -578,6 +578,7 @@ const CatalogPage = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
   const handleBrandClick = (brand) => {
     setSelectedBrand(brand);
     setCurrentPage(1);
@@ -635,17 +636,17 @@ const CatalogPage = () => {
   return (
     <section>
       <div className="container mx-auto">
-        <PagesNav items={items} />
+        {/* <PagesNav items={items} /> */}
 
-        <CatalogSlider />
+        {/* <CatalogSlider /> */}
 
-        <SectionHeaders mainHeader={"Каталог"} />
+        {/* <SectionHeaders mainHeader={"Каталог"} /> */}
 
         <div className="flex flex-col justify-center gap-10 xs:px-0 xs2:pb-8 px-8 mx-auto relative">
           {!items || items.length === 0 ? (
             <p>Не знайдено товар</p>
           ) : (
-            <div className="flex items-start justify-between gap-4 sm:gap-10 py-8">
+            <div className="flex items-center lg:items-start marker:justify-center lg:justify-between gap-4 sm:gap-10 py-8 flex-col lg:flex-row">
               <aside className="flex flex-col gap-4">
                 <Filter
                   items={items}
@@ -664,7 +665,7 @@ const CatalogPage = () => {
               </aside>
 
               <div className="flex flex-col gap-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                   {paginatedItems.length > 0 ? (
                     paginatedItems.map((item, index) => (
                       <CatalogCard key={index} item={item} />
