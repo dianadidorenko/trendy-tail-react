@@ -61,10 +61,10 @@ const Filter = ({
   return (
     <>
       {isMobile ? (
-        <div className="flex gap-y-1 sm:gap-y-4 sm:border border-gray-200 p-1 rounded-[10px] w-full xsSm:grid xsSm:grid-cols-5 xs:gap-x-6 xs:justify-center flex-col xsSm:flex-row">
+        <div className="flex flex-wrap gap-y-3 sm:gap-y-4 sm:border border-gray-200 p-1 rounded-[10px] w-full xsSm:grid xsSm:grid-cols-5 xs:gap-x-6 xs:justify-center xsSm:flex-row">
           <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[90px] sm:min-w-[102px] sm:max-w-[102px] hover:text-darkBlueColor transition-all"
+              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[90px] sm:min-w-[102px] sm:max-w-[102px] hover:text-darkBlueColor transition-all outline-none"
               onChange={(e) => handleCategoryClick(e.target.value)}
               value={selectedCategory || ""}
             >
@@ -79,7 +79,7 @@ const Filter = ({
 
           <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[78px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all"
+              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[78px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all outline-none"
               onChange={(e) => handleBrandClick(e.target.value)}
               value={selectedBrand || ""}
             >
@@ -94,7 +94,7 @@ const Filter = ({
 
           <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[78px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all"
+              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[78px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all outline-none"
               onChange={(e) => handleSeasonClick(e.target.value)}
               value={selectedSeason || ""}
             >
@@ -109,7 +109,7 @@ const Filter = ({
 
           <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[66px] sm:max-w-[73px] sm:min-w-[73px] hover:text-darkBlueColor transition-all"
+              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[66px] sm:max-w-[73px] sm:min-w-[73px] hover:text-darkBlueColor transition-all outline-none"
               onChange={(e) => handleTypeClick(e.target.value)}
               value={selectedType || ""}
             >
@@ -124,7 +124,7 @@ const Filter = ({
 
           <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[70px] sm:max-w-[70px] sm:min-w-[70px] hover:text-darkBlueColor transition-all"
+              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[70px] sm:max-w-[70px] sm:min-w-[70px] hover:text-darkBlueColor transition-all outline-none"
               onChange={(e) => {
                 const value = e.target.value;
                 let range;
@@ -165,7 +165,7 @@ const Filter = ({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-y-4 border border-gray-200 p-2 rounded-[10px] w-full md:min-w-[170px]">
+        <div className="flex flex-col gap-y-4 border border-gray-200 p-2 rounded-[10px] w-full md:min-w-[180px]">
           <div>
             <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
               Категорія:
@@ -321,7 +321,7 @@ const Filter = ({
 
               <div className="flex flex-col gap-2 justify-center items-center">
                 <button
-                  className="px-4 py-2 bg-lightBlueColor text-white rounded text-sm sm:text-[14px]"
+                  className="lg:px-2 xl:px-4 py-2 bg-lightBlueColor text-white rounded text-sm sm:text-[14px]"
                   onClick={resetFilters}
                 >
                   Сбросить фильтры

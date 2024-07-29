@@ -391,14 +391,16 @@ table tr td:nth-child(5) {
   align-items: center;
   justify-content: center;
 }
+
 .empty-order h2 {
-  font-size: 23px;
-  padding: 50px;
+  font-size: 20px;
+  padding: 20px;
   border-radius: 20px;
   background-color: lightblue;
   border: 7px double white;
   max-width: 500px;
 }
+
 .cart-page input,
 .cart-page select {
   border: 2px solid grey;
@@ -514,7 +516,8 @@ footer a:hover {
   text-decoration: underline;
 }
 
-footer input {
+footer input,
+footer textarea {
   padding: 6px;
   min-width: 250px;
   border-radius: 10px;
@@ -522,6 +525,7 @@ footer input {
   outline: none;
   font-size: 13px;
 }
+
 @media (min-width: 1024px) {
   footer input {
     min-width: 150px;

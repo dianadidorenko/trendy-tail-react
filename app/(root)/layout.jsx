@@ -7,6 +7,7 @@ import { ThemeProvider } from "../../components/ThemeProvider";
 import CartProvider from "@/lib/context/CartContext";
 import Footer from "@/components/common/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import ToasterProvider from "@/lib/providers/ToasterProvider";
 
 const popins = Poppins({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
         >
           <ThemeProvider attribute="class" defaultTheme="light">
             <ClerkProvider>
+              <ToasterProvider />
               <Header />
               {children}
               <Footer />

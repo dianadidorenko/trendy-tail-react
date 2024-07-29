@@ -6,7 +6,6 @@ import ProductDetails from "@/components/layout/product-details/ProductDetails";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
-
 const items = [
   {
     id: 1,
@@ -527,8 +526,6 @@ const items = [
 
 const ProductDetailsPage = () => {
   const path = useParams();
-
-  console.log(path);
 
   const item = items.find((item) => item.urlName === path.productId);
 

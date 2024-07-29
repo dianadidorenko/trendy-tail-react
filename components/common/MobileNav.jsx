@@ -25,12 +25,14 @@ const MobileNav = () => {
                   className="w-[60px]"
                 />
               </Link>
-              <Nav
-                containerStyles={"flex flex-col items-center gap-y-6"}
-                linkStyles={
-                  "text-lg hover:text-orangeColor hover:dark:text-darkBlueColor transition-all"
-                }
-              />
+            
+                <Nav
+                  containerStyles={"flex flex-col items-center gap-y-6"}
+                  linkStyles={
+                    "text-lg hover:text-orangeColor hover:dark:text-darkBlueColor transition-all"
+                  }
+                />
+              
             </div>
 
             <Socials

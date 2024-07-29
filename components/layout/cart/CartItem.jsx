@@ -1,16 +1,20 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { CartContext } from "@/lib/context/CartContext";
-import { MinusCircle, PawPrint, PlusCircle } from "lucide-react";
+import { MinusCircle, PlusCircle } from "lucide-react";
 import { HiTrash } from "react-icons/hi";
 import Image from "next/image";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 import SectionHeaders from "@/components/common/SectionHeaders";
 import Loader from "@/components/Loader";
-import axios from "axios";
+import { CartContext } from "@/lib/context/CartContext";
+import { useRouter } from "next/navigation";
 
 const CartItem = () => {
+  const router = useRouter();
+
   const {
     itemAmount,
     cart,
@@ -18,18 +22,80 @@ const CartItem = () => {
     removeItem,
     increaseAmount,
     decreaseAmount,
+    clearCart,
   } = useContext(CartContext);
 
   const [loading, setLoading] = useState(false);
-
   const [regions, setRegions] = useState([]);
   const [cities, setCities] = useState([]);
   const [warehouses, setWarehouses] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [selectedWarehouse, setSelectedWarehouse] = useState("");
 
   const apiKey = "6c4bdf6606f029fdcda5699c4fde13d9";
   const apiUrl = "https://api.novaposhta.ua/v2.0/json/";
+
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const regexName = /^[a-zA-Zа-яА-я\s]+$/;
+    const regexEmail = /\w+@\w+\.\w+/;
+    const phoneRegex = /^\+380\d{9}$/;
+
+    let valid = true;
+
+    if (!regexName.test(name)) {
+      toast.error("Введіть тільки літери в ім'я");
+      valid = false;
+    }
+
+    if (!regexName.test(surname)) {
+      toast.error("Введіть тільки літери в прізвище");
+      valid = false;
+    }
+
+    if (!phoneRegex.test(phone)) {
+      toast.error("Невірний формат телефонного номера");
+      valid = false;
+    }
+
+    if (!regexEmail.test(email)) {
+      toast.error("Невірний формат email");
+      valid = false;
+    }
+
+    if (valid) {
+      try {
+        const clientInfo = `Клієнт - ${name}, ${surname}, ${email}, ${chosenRegion}, ${chosenCity}, ${chosenWarehouse}, загальна сума замовлення ${cartTotal} ₴`;
+
+        const cartInfo = cart.map(
+          (item) =>
+            `Товар - [${item.name}, кількість - ${item.amount} шт., розмір - ${item.size}, ${item.price} ₴]`
+        );
+
+        const data = {
+          formType: "form2",
+          clientInfo,
+          cartInfo,
+        };
+
+        await axios.post("/api/sendMessage", data);
+        toast.success("Повідомлення надіслано!");
+
+        router.push("/thank-you");
+        clearCart();
+      } catch (error) {
+        console.error("Помилка відправки повідомлення:", error);
+        toast.error("Не вдалося відправити повідомлення.");
+      }
+    }
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -43,11 +109,12 @@ const CartItem = () => {
         setRegions(response.data.data);
       } catch (error) {
         console.error("Error fetching regions:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchRegions();
-    setLoading(false);
   }, []);
 
   const handleRegionChange = async (region) => {
@@ -62,6 +129,8 @@ const CartItem = () => {
         },
       });
       setCities(response.data.data);
+      setSelectedCity("");
+      setWarehouses([]);
     } catch (error) {
       console.error("Error fetching cities:", error);
     }
@@ -79,10 +148,35 @@ const CartItem = () => {
         },
       });
       setWarehouses(response.data.data);
+      setSelectedWarehouse("");
     } catch (error) {
       console.error("Error fetching warehouses:", error);
     }
   };
+
+  const handleWarehouseChange = (e) => {
+    const selectedWarehouseRef = e.target.value;
+    const warehouse = warehouses.find(
+      (warehouse) => warehouse.Ref === selectedWarehouseRef
+    );
+    if (!warehouse) {
+      toast.error("Выбранный склад не найден");
+      return;
+    }
+    setSelectedWarehouse(warehouse.Ref);
+  };
+
+  const chosenRegion = regions.find(
+    (region) => region.Ref === selectedRegion
+  )?.Description;
+
+  const chosenCity = cities.find(
+    (city) => city.Ref === selectedCity
+  )?.Description;
+
+  const chosenWarehouse = warehouses.find(
+    (warehouse) => warehouse.Ref === selectedWarehouse
+  )?.Description;
 
   if (loading) {
     return <Loader />;
@@ -90,7 +184,7 @@ const CartItem = () => {
 
   return itemAmount === 0 ? (
     <div className="empty-order h-[50vh]">
-      <h2>Ваш кошик порожній :(</h2>
+      <h2>Ваш кошик порожній 🙁</h2>
     </div>
   ) : (
     <div className="cart-page pb-20">
@@ -125,116 +219,132 @@ const CartItem = () => {
           <h2 className="uppercase border-b-gray-400 border-b-2 pb-1 text-primary dark:text-white/80">
             Ваші дані
           </h2>
-
-          <form className="cart-form my-4">
+          <form className="cart-form my-4" onSubmit={handleSubmit}>
             <div className="info-user-block">
+              <input type="hidden" name="formType" value="form2" />
               <input
                 type="text"
-                id="orderName"
-                name="username"
-                placeholder="Ім'я"
+                placeholder="Trendy"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="bg-white border border-gray-300 p-2 rounded-md"
                 required
-                className="text-[12px]"
               />
               <input
                 type="text"
-                id="orderSurname"
-                name="surname"
-                placeholder="Прізвище"
+                placeholder="Brendy"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+                className="bg-white border border-gray-300 p-2 rounded-md"
                 required
-                className="text-[12px]"
               />
               <input
-                type="tel"
-                id="orderTel"
-                name="tel"
-                placeholder="+38 (___) -___-__-__"
+                type="text"
+                placeholder="+38 (0__) ___-__-__"
+                value={phone}
+                name="phone"
+                onChange={(e) => setPhone(e.target.value)}
+                className="bg-white border border-gray-300 p-2 rounded-md"
                 required
-                className="text-[12px]"
               />
               <input
                 type="email"
-                id="orderEmail"
+                placeholder="trendy@ukr.net"
+                value={email}
                 name="email"
-                placeholder="E-mail"
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-white border border-gray-300 p-2 rounded-md"
                 required
-                className="text-[12px]"
               />
             </div>
+
+            <div>
+              <div className="nova-poshta">
+                <h2 className="uppercase border-b-gray-400  border-b-2 pb-1 text-primary dark:text-white/80">
+                  Доставка
+                </h2>
+
+                <p className="text-primary flex gap-2 items-center dark:text-white/80">
+                  Нова Пошта
+                  <span className="text-gray-400 text-[12px]">
+                    Доставка по Україні 1-3 дні
+                  </span>
+                </p>
+
+                <select
+                  onChange={(e) =>
+                    handleRegionChange(JSON.parse(e.target.value))
+                  }
+                  className="text-[12px] text-gray-400"
+                >
+                  <option value="">Выберите область</option>
+                  {regions.map((region) => (
+                    <option key={region.Ref} value={JSON.stringify(region)}>
+                      {region.Description}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  onChange={(e) => handleCityChange(JSON.parse(e.target.value))}
+                  className="text-[12px] text-gray-400"
+                >
+                  <option value="">Выберите город</option>
+                  {cities.map((city) => (
+                    <option key={city.Ref} value={JSON.stringify(city)}>
+                      {city.Description}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  onChange={handleWarehouseChange}
+                  value={selectedWarehouse || ""}
+                  disabled={!selectedCity}
+                  className="text-[12px] text-gray-400"
+                >
+                  <option value="" disabled>
+                    Выберите склад
+                  </option>
+                  {warehouses.map((warehouse) => (
+                    <option key={warehouse.Ref} value={warehouse.Ref}>
+                      {warehouse.Description}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <h2 className="uppercase border-b-gray-400 border-b-2 pb-1 text-primary dark:text-white/80">
+                Оплата
+              </h2>
+
+              <div className="pay-block text-primary flex gap-2">
+                <input type="checkbox" defaultChecked />
+                <label className="text-[14px] dark:text-white/80">
+                  Післяплата
+                </label>
+                <p className="text-gray-400 text-[12px] dark:text-white/80">
+                  Оплата при отримуванні
+                </p>
+              </div>
+
+              <div className="pay-block text-primary flex gap-2">
+                <input type="checkbox" />
+                <label className="text-[14px] dark:text-white/80">
+                  Я згоден з умовами угоди користувача.
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                className="mt-4 order-button flex items-center justify-center gap-2 text-base max-w-[300px]"
+              >
+                Сплатити
+                <span>{cartTotal} ₴</span>
+              </button>
+            </div>
           </form>
-
-          <div className="nova-poshta">
-            <h2 className="uppercase border-b-gray-400  border-b-2 pb-1 text-primary dark:text-white/80">
-              Доставка
-            </h2>
-
-            <p className="text-primary flex gap-2 items-center dark:text-white/80">
-              Нова Пошта
-              <span className="text-gray-400 text-[12px]">
-                Доставка по Україні 1-3 дні
-              </span>
-            </p>
-
-            <select
-              onChange={(e) => handleRegionChange(JSON.parse(e.target.value))}
-              className="text-[12px] text-gray-400"
-            >
-              <option value="">Выберите область</option>
-              {regions.map((region) => (
-                <option key={region.Ref} value={JSON.stringify(region)}>
-                  {region.Description}
-                </option>
-              ))}
-            </select>
-
-            <select
-              onChange={(e) => handleCityChange(JSON.parse(e.target.value))}
-              className="text-[12px] text-gray-400"
-            >
-              <option value="">Выберите город</option>
-              {cities.map((city) => (
-                <option key={city.Ref} value={JSON.stringify(city)}>
-                  {city.Description}
-                </option>
-              ))}
-            </select>
-
-            <select className="text-[12px] text-gray-400">
-              <option value="">Выберите отделение</option>
-              {warehouses.map((warehouse) => (
-                <option key={warehouse.Ref} value={JSON.stringify(warehouse)}>
-                  {warehouse.Description}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <h2 className="uppercase border-b-gray-400 border-b-2 pb-1 text-primary dark:text-white/80">
-            Оплата
-          </h2>
-
-          <div className="pay-block text-primary flex gap-2">
-            <input type="checkbox" defaultChecked />
-            <label className="text-[14px] dark:text-white/80">Післяплата</label>
-            <p className="text-gray-400 text-[12px] dark:text-white/80">
-              Оплата при отримуванні
-            </p>
-          </div>
-
-          <div className="pay-block text-primary flex gap-2">
-            <input type="checkbox" />
-            <label className="text-[14px] dark:text-white/80">
-              Я згоден з умовами угоди користувача.
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            className="mt-4 order-button flex items-center justify-center gap-2 text-base max-w-[300px]"
-          >
-            Сплатити
-            <span>{cartTotal} ₴</span>
-          </button>
+          ʼ
         </div>
 
         <div className="flex flex-col gap-6 text-md">

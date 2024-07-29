@@ -3,38 +3,9 @@
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import toast from "react-hot-toast";
+import MainForm from "../layout/main-page/MainForm";
 
 export default function Footer() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [text, setText] = useState("");
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    const regexName = /^[a-zA-Zа-яА-я]+$/;
-    const regexEmail = /\w+@\w+\.\w+/;
-
-    if (regexEmail.test(email)) {
-      setEmail(email);
-    } else {
-      toast.error("Формат мейла повинен виглядати так - trendy@ukr.net");
-    }
-
-    if (text.length < 10) {
-      toast.error("Повідомлення повинно містити мімінмум 10 літер");
-    } else {
-      setText(text);
-    }
-
-    if (regexName.test(name)) {
-      setName(name);
-    } else {
-      toast.error("Введіть тільки літери");
-    }
-  };
-
   return (
     <footer className="flex flex-col gap-6 bg-lightBlueColor dark:bg-accent dark:text-white/80">
       <div className="flex flex-wrap xs:gap-x-8 xs:gap-y-6 xs:justify-center sm:items-start md:gap-x-16 xs:px-2 sm:px-4 md:px-5 lg:px-7">
@@ -129,46 +100,7 @@ export default function Footer() {
 
         <div className="flex flex-col gap-y-2">
           <h2 className="xs:text-base pb-1">Зв’язатися з нами</h2>
-          <form
-            className="flex flex-col gap-y-1"
-            onSubmit={(e) => handleChange(e)}
-          >
-            <label className="xs:text-sm">Ім'я</label>
-            <input
-              type="text"
-              placeholder="Trendy"
-              value={name}
-              name="name"
-              onChange={(e) => setName(e.target.value)}
-              className="bg-white"
-            />
-
-            <label className="xs:text-sm">E-mail</label>
-            <input
-              type="email"
-              placeholder="trendy@ukr.net"
-              value={email}
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              className="bg-white"
-            />
-            <label className="xs:text-sm">Текст повідомлення</label>
-            <input
-              type="text"
-              placeholder="Ваш текст"
-              value={text}
-              name="text"
-              onChange={(e) => setText(e.target.value)}
-              className="bg-white"
-            />
-
-            <button
-              type="submit"
-              className="rounded-md bg-darkBlueColor dark:bg-lightBlueColor text-white py-1 px-4 xs:text-[10px] sm:text-xs lg:text-sm mt-1"
-            >
-              Надіслати
-            </button>
-          </form>
+          <MainForm />
         </div>
 
         <div className="flex flex-col items-center justify-center gap-y-3 xs:text-sm">
@@ -195,7 +127,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
       <p className="text-center border-t border-t-zinc-300 pt-[30px] xs:px-2 sm:px-4 md:px-5 lg:px-7 xs:text-xs sm:text-sm lg:text-base">
         TrendyTail © Copyright 2024 |<span> Всі права захищені</span>
       </p>
