@@ -9,7 +9,7 @@ const Gallery = ({ productMedia, itemName }) => {
 
   return (
     <div className="flex flex-col xs:items-center">
-      <div className="flex flex-col gap-3 max-w-[410px]">
+      <div className="flex flex-col gap-3 xs:max-w-[250px] xsSm:max-w-[300px] sm:max-w-[410px]">
         <Image
           src={mainImage}
           width={410}
@@ -37,7 +37,7 @@ const Gallery = ({ productMedia, itemName }) => {
       </div>
 
       {productMedia.length > 3 && (
-        <div className="flex items-end justify-end ">
+        <div className="flex items-end justify-end">
           <DoubleArrowRightIcon className="w-[35px] h-[35px] animate-swipe repeat-infinite border rounded-full border-gray-200 mt-1 py-2" />
         </div>
       )}

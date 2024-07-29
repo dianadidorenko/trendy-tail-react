@@ -1,9 +1,22 @@
 "use client";
 
-import { CartContext } from "@/lib/context/CartContext";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import Modal from "react-modal";
+
+import { CartContext } from "@/lib/context/CartContext";
+import Link from "next/link";
+
+Modal.setAppElement("body");
+
+const modalStyles = {
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  position: "static",
+};
 
 const tableLink = {
   target: "sizes",
@@ -12,7 +25,6 @@ const tableLink = {
 
 const ProductDetails = ({
   id,
-  
   itemName,
   productInfo,
   productSize,
@@ -21,6 +33,16 @@ const ProductDetails = ({
   productCategory,
   images,
 }) => {
+  const [modal, setModal] = useState(false);
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   const { addToCart } = useContext(CartContext);
 
   const [selectedSize, setSelectedSize] = useState(productSize[0]);
@@ -149,7 +171,7 @@ const ProductDetails = ({
 
         <button
           className="w-[150px] h-[45px] group relative cursor-pointer overflow-hidden bg-redColor p-2 rounded-full border-2 shadow-lg"
-          onClick={() =>
+          onClick={() => {
             addToCart(
               id,
               itemName.name,
@@ -157,15 +179,61 @@ const ProductDetails = ({
               images[0],
               selectedSize,
               quantity
-            )
-          }
+            );
+            openModal();
+          }}
         >
-          {/* animation */}
           <span className="ease absolute top-1/2 h-0 w-64 origin-center -translate-x-20 rotate-45 bg-[#f04340] transition-all duration-500 group-hover:h-64 group-hover:-translate-y-32"></span>
           <span className="ease relative text-white transition duration-500 group-hover:text-white">
             Купить
           </span>
         </button>
+
+        {modal && (
+          <Modal
+            isOpen={modal}
+            style={modalStyles}
+            onRequestClose={closeModal}
+            contentLabel="Catalog Modal"
+            className="bg-white outline-none p-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+          >
+            <div className="min-w-[180px] border border-gray-800/40 px-4 py-2 md:px-2 rounded-[10px] flex flex-col items-center gap-2 md:gap-4">
+              <h2 className="text-center text-[12px] max-w-[170px] md:text-[16px] md:max-w-[230px]">
+                ТОВАР УСПІШНО ДОДАНО ДО ВАШОГО КОШИКА
+              </h2>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4">
+                <div>
+                  <Image
+                    src={images[0]}
+                    width={150}
+                    height={150}
+                    alt={itemName.name}
+                  />
+                </div>
+                <div className="flex flex-col gap-1 text-[13px] text-center md:text-[16px]">
+                  <h2>{itemName.name}</h2>
+                  <p>Розмір: {selectedSize}</p>
+                  <p>Кількість: {quantity}</p>
+                  <p>Итого: {selectedPrice} ₴</p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2 md:gap-4 justify-between">
+                <button
+                  onClick={closeModal}
+                  className="rounded-[10px] p-1 bg-gray-500 hover:bg-gray-400 transition-all text-white text-center text-[12px] xsSm:text-[14px] md:text-[15px] md:px-2 lg:text-[16px]"
+                >
+                  Продовжити покупки
+                </button>
+                <Link
+                  href={"/cart"}
+                  className="rounded-[10px] p-1 bg-green-600 hover:bg-green-500 transition-all text-white text-center text-[12px] xsSm:text-[14px] md:text-[15px] md:px-2 lg:text-[16px]"
+                >
+                  Перейти до кошика
+                </Link>
+              </div>
+            </div>
+          </Modal>
+        )}
       </div>
     </div>
   );

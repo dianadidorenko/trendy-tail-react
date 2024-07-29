@@ -5,12 +5,12 @@ import { MinusCircle, PlusCircle } from "lucide-react";
 import { HiTrash } from "react-icons/hi";
 import Image from "next/image";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 import SectionHeaders from "@/components/common/SectionHeaders";
 import Loader from "@/components/Loader";
 import { CartContext } from "@/lib/context/CartContext";
-import { useRouter } from "next/navigation";
 
 const CartItem = () => {
   const router = useRouter();
@@ -344,7 +344,6 @@ const CartItem = () => {
               </button>
             </div>
           </form>
-          ʼ
         </div>
 
         <div className="flex flex-col gap-6 text-md">
