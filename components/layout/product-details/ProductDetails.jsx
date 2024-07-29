@@ -12,6 +12,7 @@ const tableLink = {
 
 const ProductDetails = ({
   id,
+  
   itemName,
   productInfo,
   productSize,
