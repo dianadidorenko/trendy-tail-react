@@ -24,12 +24,12 @@ export default function WelcomeTitle() {
               width={400}
               height={424}
               alt="Картинка"
-              className="xs:max-w-[180px] lg:max-w-[250px]"
+              className="xs:max-w-[180px] lg:max-w-[240px]"
             />
           </motion.div>
-          <div className="welcome-title xs:max-w-[350px] sm:max-w-none lg:max-w-[360px] xl:max-w-[530px]">
+          <div className="welcome-title xs:max-w-[350px] lg:max-w-none xl:max-w-[530px]">
             <motion.h1
-              className="text-lightBlueColor font-orelegaOne pb-3 text-[20px] md:text-[23px] xl:text-[30px]"
+              className="text-lightBlueColor font-orelegaOne pb-3 text-[20px] md:text-[23px] lg:text-[26px] xl:text-[30px]"
               variants={fadeIn("up", 0.4)}
               initial="hidden"
               whileInView={"show"}
@@ -38,7 +38,7 @@ export default function WelcomeTitle() {
               Якісні зоотовари від виробника для ваших улюбленців
             </motion.h1>
             <motion.h2
-              className="max-w-[300px] xl:max-w-[480px] mx-auto pb-[30px] xs:pb-[20px] text-[13.5px] xl:text-[22px] text-primary dark:text-white"
+              className="max-w-[380px] xl:max-w-[480px] mx-auto pb-[30px] xs:pb-[20px] text-[14px] lg:text-[18px] xl:text-[22px] text-primary dark:text-white"
               variants={fadeIn("up", 0.8)}
               initial="hidden"
               whileInView={"show"}
@@ -79,7 +79,7 @@ export default function WelcomeTitle() {
               width={388}
               height={424}
               alt="Картинка"
-              className="xs:max-w-[180px] lg:max-w-[250px]"
+              className="xs:max-w-[180px] lg:max-w-[240px]"
             />
           </motion.div>
         </div>

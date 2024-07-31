@@ -44,7 +44,7 @@ const SettingsHeader = ({ containerStyles, linkStyles }) => {
           className="hover:text-orangeColor transition-all hover:dark:text-darkBlueColor"
         />
         {itemAmount > 0 && (
-          <span className="absolute right-5 top-4 bg-white border-2 border-darkBlueColor py-[1px] px-[6px] rounded-full text-primary text-[12px] transition-all">
+          <span className="absolute right-5 top-4 max-[390px]:right-2 bg-white border-2 border-darkBlueColor py-[1px] px-[6px] rounded-full text-primary text-[12px] transition-all">
             {itemAmount}
           </span>
         )}

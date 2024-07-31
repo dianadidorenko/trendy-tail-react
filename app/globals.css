@@ -396,8 +396,6 @@ table tr td:nth-child(5) {
   font-size: 20px;
   padding: 20px;
   border-radius: 20px;
-  background-color: lightblue;
-  border: 7px double white;
   max-width: 500px;
 }
 

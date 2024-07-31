@@ -7,12 +7,12 @@ const Filter = ({
   items,
   selectedBrand,
   selectedCategory,
-  selectedSeason,
-  selectedType,
+  selectedSeason = "",
+  selectedType = "",
   handleBrandClick,
-  handleCategoryClick,
-  handleSeasonClick,
-  handleTypeClick,
+  handleCategoryClick = () => {},
+  handleSeasonClick = () => {},
+  handleTypeClick = () => {},
   priceRange,
   onPriceRangeChange,
   resetFilters,
@@ -45,7 +45,6 @@ const Filter = ({
 
   const [otherFiltersOpen, setOtherFiltersOpen] = useState(false);
 
-  // изменение элементов при уменьшении/увеличении окна
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   useEffect(() => {
@@ -58,13 +57,22 @@ const Filter = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Проверка, нужно ли скрывать фильтры по сезону и типу
+
+  console.log(selectedCategory);
+
+  const shouldHideSeasonFilter =
+    selectedCategory === "Ліжаки" || selectedCategory === "Сумки-переноски";
+  const shouldHideTypeFilter =
+    selectedCategory === "Ліжаки" || selectedCategory === "Сумки-переноски";
+
   return (
     <>
       {isMobile ? (
         <div className="flex flex-wrap gap-y-3 sm:gap-y-4 sm:border border-gray-200 p-1 rounded-[10px] w-full xsSm:grid xsSm:grid-cols-5 xs:gap-x-6 xs:justify-center xsSm:flex-row">
           <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[90px] sm:min-w-[102px] sm:max-w-[102px] hover:text-darkBlueColor transition-all outline-none"
+              className="cursor-pointer text-[13px] sm:text-[14px] max-w-[95px] sm:min-w-[102px] sm:max-w-[102px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
               onChange={(e) => handleCategoryClick(e.target.value)}
               value={selectedCategory || ""}
             >
@@ -79,7 +87,7 @@ const Filter = ({
 
           <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[78px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all outline-none"
+              className="cursor-pointer text-[13px] sm:text-[14px] max-w-[83px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
               onChange={(e) => handleBrandClick(e.target.value)}
               value={selectedBrand || ""}
             >
@@ -92,9 +100,9 @@ const Filter = ({
             </select>
           </div>
 
-          <div className="flex flex-col gap-2 justify-center items-center">
+          {/* <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[78px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all outline-none"
+              className="cursor-pointer text-[13px] sm:text-[14px] max-w-[83px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
               onChange={(e) => handleSeasonClick(e.target.value)}
               value={selectedSeason || ""}
             >
@@ -105,11 +113,28 @@ const Filter = ({
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
-          <div className="flex flex-col gap-2 justify-center items-center">
+          {!shouldHideSeasonFilter && (
+            <div className="flex flex-col gap-2 justify-center items-center">
+              <select
+                className="cursor-pointer text-[13px] sm:text-[14px] max-w-[83px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
+                onChange={(e) => handleSeasonClick(e.target.value)}
+                value={selectedSeason || ""}
+              >
+                <option value="">Всі сезони</option>
+                {uniqueSeasons.map((season) => (
+                  <option key={season} value={season}>
+                    {season}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[66px] sm:max-w-[73px] sm:min-w-[73px] hover:text-darkBlueColor transition-all outline-none"
+              className="cursor-pointer text-[13px] sm:text-[14px] max-w-[71px] sm:max-w-[73px] sm:min-w-[73px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
               onChange={(e) => handleTypeClick(e.target.value)}
               value={selectedType || ""}
             >
@@ -120,11 +145,28 @@ const Filter = ({
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
+
+          {!shouldHideTypeFilter && (
+            <div className="flex flex-col gap-2 justify-center items-center">
+              <select
+                className="cursor-pointer text-[13px] sm:text-[14px] max-w-[71px] sm:max-w-[73px] sm:min-w-[73px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
+                onChange={(e) => handleTypeClick(e.target.value)}
+                value={selectedType || ""}
+              >
+                <option value="">Всі типи</option>
+                {uniqueClothType.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <div className="flex flex-col gap-2 justify-center items-center">
             <select
-              className="cursor-pointer text-[12px] sm:text-[14px] max-w-[70px] sm:max-w-[70px] sm:min-w-[70px] hover:text-darkBlueColor transition-all outline-none"
+              className="cursor-pointer text-[13px] sm:text-[14px] max-w-[75px] sm:max-w-[70px] sm:min-w-[70px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
               onChange={(e) => {
                 const value = e.target.value;
                 let range;
@@ -174,7 +216,7 @@ const Filter = ({
               {uniqueCategories.map((category) => (
                 <li
                   key={category}
-                  className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor transition-all ${
+                  className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor transition-all hover:dark:text-lightBlueColor ${
                     selectedCategory === category
                       ? "bg-blue-100 rounded-sm text-accent"
                       : ""
@@ -195,7 +237,7 @@ const Filter = ({
               {uniqueBrands.map((brand) => (
                 <li
                   key={brand}
-                  className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor ${
+                  className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
                     selectedBrand === brand
                       ? "bg-blue-100 rounded-sm text-accent"
                       : ""
@@ -219,7 +261,7 @@ const Filter = ({
 
           {otherFiltersOpen && (
             <>
-              <div>
+              {/* <div>
                 <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
                   Сезон:
                 </h2>
@@ -227,7 +269,7 @@ const Filter = ({
                   {uniqueSeasons.map((season) => (
                     <li
                       key={season}
-                      className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor ${
+                      className={`cursor-poainter text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
                         selectedSeason === season
                           ? "bg-blue-100 rounded-sm text-accent"
                           : ""
@@ -238,9 +280,9 @@ const Filter = ({
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
                   Тип одягу:
                 </h2>
@@ -248,7 +290,7 @@ const Filter = ({
                   {uniqueClothType.map((type) => (
                     <li
                       key={type}
-                      className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor ${
+                      className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
                         selectedType === type
                           ? "bg-blue-100 rounded-sm text-accent"
                           : ""
@@ -259,7 +301,53 @@ const Filter = ({
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
+
+              {!shouldHideSeasonFilter && (
+                <div>
+                  <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
+                    Сезон:
+                  </h2>
+                  <ul className="grid grid-cols-1 gap-1 pt-3">
+                    {uniqueSeasons.map((season) => (
+                      <li
+                        key={season}
+                        className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
+                          selectedSeason === season
+                            ? "bg-blue-100 rounded-sm text-accent"
+                            : ""
+                        }`}
+                        onClick={() => handleSeasonClick(season)}
+                      >
+                        {season}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {!shouldHideTypeFilter && (
+                <div>
+                  <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
+                    Тип одягу:
+                  </h2>
+                  <ul className="grid grid-cols-1 gap-1 pt-3">
+                    {uniqueClothType.map((type) => (
+                      <li
+                        key={type}
+                        className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
+                          selectedType === type
+                            ? "bg-blue-100 rounded-sm text-accent"
+                            : ""
+                        }`}
+                        onClick={() => handleTypeClick(type)}
+                      >
+                        {type}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               <div>
                 <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
@@ -267,7 +355,7 @@ const Filter = ({
                 </h2>
                 <ul className="grid grid-cols-1 gap-1 pt-3">
                   <li
-                    className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor ${
+                    className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
                       priceRange[1] === 500
                         ? "bg-blue-100 rounded-sm text-accent"
                         : ""
@@ -277,7 +365,7 @@ const Filter = ({
                     Менше 500 грн
                   </li>
                   <li
-                    className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor ${
+                    className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
                       priceRange[0] === 501 && priceRange[1] === 1000
                         ? "bg-blue-100 rounded-sm text-accent"
                         : ""
@@ -287,7 +375,7 @@ const Filter = ({
                     501-1000 грн
                   </li>
                   <li
-                    className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor ${
+                    className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
                       priceRange[0] === 1001 && priceRange[1] === 1500
                         ? "bg-blue-100 rounded-sm text-accent"
                         : ""
@@ -340,5 +428,4 @@ const Filter = ({
     </>
   );
 };
-
 export default Filter;

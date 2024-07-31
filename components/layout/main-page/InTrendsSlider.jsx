@@ -60,7 +60,7 @@ const InTrendsSlider = ({ items }) => {
                     height={180}
                     alt={item.name}
                     key={item.name}
-                    className="rounded-[20px] object-cover"
+                    className="rounded-[20px] object-cover md:max-w-[150px] xl:max-w-none"
                   />
                 ))}
                 <h2 className="text-[16px] font-bold">{item.name}</h2>

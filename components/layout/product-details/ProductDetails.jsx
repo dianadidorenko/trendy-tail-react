@@ -195,9 +195,9 @@ const ProductDetails = ({
             style={modalStyles}
             onRequestClose={closeModal}
             contentLabel="Catalog Modal"
-            className="bg-white outline-none p-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+            className="bg-white dark:bg-accent outline-none p-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl"
           >
-            <div className="min-w-[180px] border border-gray-800/40 px-4 py-2 md:px-2 rounded-[10px] flex flex-col items-center gap-2 md:gap-4">
+            <div className="min-w-[180px] border border-gray-800/40 px-4 py-2 md:px-6 rounded-[10px] flex flex-col items-center gap-2 md:gap-4 dark:text-white dark:border-white">
               <h2 className="text-center text-[12px] max-w-[170px] md:text-[16px] md:max-w-[230px]">
                 ТОВАР УСПІШНО ДОДАНО ДО ВАШОГО КОШИКА
               </h2>
@@ -208,12 +208,13 @@ const ProductDetails = ({
                     width={150}
                     height={150}
                     alt={itemName.name}
+                    className="rounded-xl max-w-[110px] max-h-[110px] md:max-w-[150px] md:ma-h-[150px]"
                   />
                 </div>
                 <div className="flex flex-col gap-1 text-[13px] text-center md:text-[16px]">
                   <h2>{itemName.name}</h2>
                   <p>Розмір: {selectedSize}</p>
-                  <p>Кількість: {quantity}</p>
+                  <p>Кількість: {quantity} шт.</p>
                   <p>Итого: {selectedPrice} ₴</p>
                 </div>
               </div>

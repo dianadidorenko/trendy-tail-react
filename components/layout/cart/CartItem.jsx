@@ -184,31 +184,35 @@ const CartItem = () => {
 
   return itemAmount === 0 ? (
     <div className="empty-order h-[50vh]">
-      <h2>Ваш кошик порожній 🙁</h2>
+      <h2 className="border-double border-lightBlueColor dark:border-darkBlueColor border-[7px]">
+        Ваш кошик порожній 🙁
+      </h2>
     </div>
   ) : (
     <div className="cart-page pb-20">
       <div>
         <SectionHeaders mainHeader={"Замовлення"} />
         <div className="flex flex-col items-center justify-center mb-8">
-          <div>
-            <h1 className="flex gap-5 items-center text-[28px] text-lightBlueColor">
-              <Image
-                src={"/cart/paw-icon.svg"}
-                width={30}
-                height={30}
-                alt="Лапа"
-              />
+          <div className="flex items-center justify-center gap-2 text-center">
+            <Image
+              src={"/cart/paw-icon.svg"}
+              width={30}
+              height={30}
+              alt="Лапа"
+              className="xs:hidden sm:flex"
+            />
+            <h1 className="text-[30px] text-lightBlueColor">
               Оформлення замовлення
-              <Image
-                src={"/cart/paw-icon.svg"}
-                width={30}
-                height={30}
-                alt="Лапа"
-              />
             </h1>
+            <Image
+              src={"/cart/paw-icon.svg"}
+              width={30}
+              height={30}
+              alt="Лапа"
+              className="xs:hidden sm:flex"
+            />
           </div>
-          <p className="text-[11px]">
+          <p className="text-[14px] max-w-[220px] sm:max-w-none text-center">
             Заповніть наступні поля для оформлення вашого замовлення
           </p>
         </div>
