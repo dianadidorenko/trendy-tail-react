@@ -10,12 +10,13 @@ const AccessoriesPage = () => {
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
 
+  // Фильтруем товары по выбранной категории
   const filteredItems = useMemo(() => {
     if (!category) return items;
     return items.filter((item) => item.categoryShow === category);
   }, [category]);
 
-  return <PagesCatalogNav items={filteredItems} />;
+  return <PagesCatalogNav items={filteredItems} paramsCategory={category} />;
 };
 
 export default AccessoriesPage;

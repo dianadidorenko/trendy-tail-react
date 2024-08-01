@@ -16,7 +16,7 @@ const BedsPage = () => {
     return items.filter((item) => item.categoryShow === category);
   }, [category]);
 
-  return <PagesCatalogNav items={filteredItems} />;
+  return <PagesCatalogNav items={filteredItems} paramsCategory={category} />;
 };
 
 export default BedsPage;

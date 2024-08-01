@@ -6,7 +6,11 @@ const CatalogCard = ({ item }) => {
 
   return (
     <div className="flex flex-col text-center gap-2 py-4 px-10 rounded-lg catalogue-item border border-gray-100/80">
-      <Link href={`/${item.urlName}`} key={item.id} className="relative">
+      <Link
+        href={`/products/${item.urlName}`}
+        key={item.id}
+        className="relative"
+      >
         <div className="image-container">
           <img
             src={images[0]}

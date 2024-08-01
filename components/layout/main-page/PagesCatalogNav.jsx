@@ -8,7 +8,7 @@ import SectionHeaders from "@/components/common/SectionHeaders";
 
 const ITEMS_PER_PAGE = 9;
 
-const PagesCatalogNav = ({ items }) => {
+const PagesCatalogNav = ({ items, paramsCategory }) => {
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
@@ -27,7 +27,7 @@ const PagesCatalogNav = ({ items }) => {
       const matchesPrice =
         item.startingPrice >= priceRange[0] &&
         item.startingPrice <= priceRange[1];
-      return matchesBrand && matchesSeason && matchesType && matchesPrice;
+      return matchesSeason && matchesType && matchesBrand && matchesPrice;
     });
   }, [items, selectedBrand, selectedSeason, selectedType, priceRange]);
 
@@ -94,6 +94,7 @@ const PagesCatalogNav = ({ items }) => {
                   handleTypeClick={handleTypeClick}
                   onPriceRangeChange={handlePriceRangeChange}
                   resetFilters={resetFilters}
+                  paramsCategory={paramsCategory}
                 />
               </aside>
 
@@ -104,7 +105,9 @@ const PagesCatalogNav = ({ items }) => {
                       <CatalogCard key={index} item={item} />
                     ))
                   ) : (
-                    <p>No items found.</p>
+                    <div className="flex items-center justify-center">
+                      <h2>Не знайдено товар.</h2>
+                    </div>
                   )}
                 </div>
 

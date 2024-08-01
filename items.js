@@ -118,7 +118,7 @@ export const items = [
     id: 5,
     name: "Сумка-переноска Remy",
     urlName: "carrying-bag-remy",
-    category: "carrying-bag",
+    category: "carrying-bags",
     categoryShow: "Сумки-переноски",
     description:
       "Створено з турботою про комфорт господаря і улюбленця!Переваги моделі: оптимальна форма, зйомний «дах», віконечко з сіткою, довгі м’які ручки, кишеня для дрібниць.",
@@ -443,7 +443,7 @@ export const items = [
     id: 16,
     name: "Сумка-переноска Silva",
     urlName: "carrying-bag-silva",
-    category: "carrying-bag",
+    category: "carrying-bags",
     categoryShow: "Сумки-переноски",
     description:
       "Сумка-переноска SILVA - це гарантований комфорт для вашого улюбленця під час будь-якої подорожі! Зручна форма, віконечко для огляду і вентиляції – все для зручності вашого чотириногого друга.",
@@ -466,7 +466,7 @@ export const items = [
     id: 17,
     name: "Сумка-переноска Vesta",
     urlName: "carrying-bag-vesta",
-    category: "carrying-bag",
+    category: "carrying-bags",
     categoryShow: "Сумки-переноски",
     description:
       "Сумка-переноска має віконця, в які улюбленець може дивитися під час подорожі. М’яке дно і стіни роблять мандрівку комфортною. Господар може нести сумку в руці або на плечі — є зручні ручки і довгий ремінь з м’якою накладкою.",

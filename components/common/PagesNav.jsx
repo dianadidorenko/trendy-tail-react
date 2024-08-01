@@ -1,10 +1,13 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 const PagesNav = ({ items }) => {
   const path = useParams();
+  const pathname = usePathname();
   const itemName = items.find((item) => path.productId === item.urlName);
+
+  const pathName = items.find((item) => pathname === "/" + item.category);
 
   return (
     <div className="flex items-center gap-1 py-2">
@@ -36,13 +39,35 @@ const PagesNav = ({ items }) => {
                 itemName ? "text-primary dark:text-white/90" : "text-primary/50"
               }`}
             />
-            <p className="text-primary dark:text-white/90">{itemName.name}</p>
+            <p className="text-primary dark:text-white/90">{itemName?.name}</p>
           </div>
         </div>
       ) : (
         <p className="text-primary flex items-center dark:text-white/90">
           Каталог
         </p>
+      )}
+
+      {pathName?.categoryShow && (
+        <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1">
+            <ChevronRight
+              size={18}
+              className={`${
+                itemName ? "text-primary dark:text-white/90" : "text-primary/50"
+              }`}
+            />
+          </div>
+          <Link href={`/${pathName?.category}`}>
+            <p
+              className={`${
+                itemName ? "text-primary/50 dark:text-white/50" : "text-primary"
+              }`}
+            >
+              {pathName?.categoryShow}
+            </p>
+          </Link>
+        </div>
       )}
     </div>
   );

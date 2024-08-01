@@ -16,6 +16,7 @@ const Filter = ({
   priceRange,
   onPriceRangeChange,
   resetFilters,
+  paramsCategory = "",
 }) => {
   // Находим уникальные категории
   const uniqueCategories = [...new Set(items.map((item) => item.categoryShow))];
@@ -58,13 +59,15 @@ const Filter = ({
   }, []);
 
   // Проверка, нужно ли скрывать фильтры по сезону и типу
-
-  console.log(selectedCategory);
-
   const shouldHideSeasonFilter =
-    selectedCategory === "Ліжаки" || selectedCategory === "Сумки-переноски";
+    paramsCategory === "Ліжаки" ||
+    paramsCategory === "Сумки-переноски" ||
+    uniqueSeasons.length === 0;
+
   const shouldHideTypeFilter =
-    selectedCategory === "Ліжаки" || selectedCategory === "Сумки-переноски";
+    paramsCategory === "Ліжаки" ||
+    paramsCategory === "Сумки-переноски" ||
+    uniqueClothType.length === 0;
 
   return (
     <>
@@ -100,21 +103,6 @@ const Filter = ({
             </select>
           </div>
 
-          {/* <div className="flex flex-col gap-2 justify-center items-center">
-            <select
-              className="cursor-pointer text-[13px] sm:text-[14px] max-w-[83px] sm:max-w-[87px] sm:min-w-[87px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
-              onChange={(e) => handleSeasonClick(e.target.value)}
-              value={selectedSeason || ""}
-            >
-              <option value="">Всі сезони</option>
-              {uniqueSeasons.map((season) => (
-                <option key={season} value={season}>
-                  {season}
-                </option>
-              ))}
-            </select>
-          </div> */}
-
           {!shouldHideSeasonFilter && (
             <div className="flex flex-col gap-2 justify-center items-center">
               <select
@@ -131,21 +119,6 @@ const Filter = ({
               </select>
             </div>
           )}
-
-          {/* <div className="flex flex-col gap-2 justify-center items-center">
-            <select
-              className="cursor-pointer text-[13px] sm:text-[14px] max-w-[71px] sm:max-w-[73px] sm:min-w-[73px] hover:text-darkBlueColor transition-all outline-none dark:bg-background hover:dark:text-lightBlueColor"
-              onChange={(e) => handleTypeClick(e.target.value)}
-              value={selectedType || ""}
-            >
-              <option value="">Всі типи</option>
-              {uniqueClothType.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div> */}
 
           {!shouldHideTypeFilter && (
             <div className="flex flex-col gap-2 justify-center items-center">
@@ -228,7 +201,6 @@ const Filter = ({
               ))}
             </ul>
           </div>
-
           <div>
             <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
               Бренд:
@@ -249,7 +221,6 @@ const Filter = ({
               ))}
             </ul>
           </div>
-
           {otherFiltersOpen === false && (
             <button
               className="px-4 py-2 bg-lightBlueColor text-white rounded text-sm sm:text-[14px]"
@@ -258,51 +229,8 @@ const Filter = ({
               Показати ще
             </button>
           )}
-
           {otherFiltersOpen && (
             <>
-              {/* <div>
-                <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
-                  Сезон:
-                </h2>
-                <ul className="grid grid-cols-1 gap-1 pt-3">
-                  {uniqueSeasons.map((season) => (
-                    <li
-                      key={season}
-                      className={`cursor-poainter text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
-                        selectedSeason === season
-                          ? "bg-blue-100 rounded-sm text-accent"
-                          : ""
-                      }`}
-                      onClick={() => handleSeasonClick(season)}
-                    >
-                      {season}
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
-
-              {/* <div>
-                <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">
-                  Тип одягу:
-                </h2>
-                <ul className="grid grid-cols-1 gap-1 pt-3">
-                  {uniqueClothType.map((type) => (
-                    <li
-                      key={type}
-                      className={`cursor-pointer text-[13px] sm:text-[14px] filter-li hover:text-darkBlueColor hover:dark:text-lightBlueColor ${
-                        selectedType === type
-                          ? "bg-blue-100 rounded-sm text-accent"
-                          : ""
-                      }`}
-                      onClick={() => handleTypeClick(type)}
-                    >
-                      {type}
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
-
               {!shouldHideSeasonFilter && (
                 <div>
                   <h2 className="font-bold text-[14px] sm:text-[16px] italic border pl-3 border-slate-400/50 shadow-sm shadow-slate-50 rounded-full">

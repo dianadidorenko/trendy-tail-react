@@ -580,62 +580,62 @@ const CatalogPage = () => {
     setCurrentPage(page);
   };
 
-  /////
-  const handleFilterChange = (setter) => (value) => {
-    setter(value);
-    setCurrentPage(1);
-  };
-
-  const handlePriceRangeChange = (range) => {
-    setPriceRange(range);
-    setCurrentPage(1);
-  };
-  /////
-
-  // const handleBrandClick = (brand) => {
-  //   setSelectedBrand(brand);
+  // созависимая фильтрация
+  // const handleFilterChange = (setter) => (value) => {
+  //   setter(value);
   //   setCurrentPage(1);
-  //   setSelectedCategory(null);
-  //   setSelectedSeason(null);
-  //   setSelectedType(null);
-  //   setPriceRange([0, 2500]);
-  // };
-
-  // const handleCategoryClick = (category) => {
-  //   setSelectedCategory(category);
-  //   setCurrentPage(1);
-  //   setSelectedBrand(null);
-  //   setSelectedSeason(null);
-  //   setSelectedType(null);
-  //   setPriceRange([0, 2500]);
-  // };
-
-  // const handleSeasonClick = (season) => {
-  //   setSelectedSeason(season);
-  //   setCurrentPage(1);
-  //   setSelectedBrand(null);
-  //   setSelectedCategory(null);
-  //   setSelectedType(null);
-  //   setPriceRange([0, 2500]);
-  // };
-
-  // const handleTypeClick = (type) => {
-  //   setSelectedType(type);
-  //   setCurrentPage(1);
-  //   setSelectedBrand(null);
-  //   setSelectedCategory(null);
-  //   setSelectedSeason(null);
-  //   setPriceRange([0, 2500]);
   // };
 
   // const handlePriceRangeChange = (range) => {
   //   setPriceRange(range);
   //   setCurrentPage(1);
-  //   setSelectedBrand(null);
-  //   setSelectedCategory(null);
-  //   setSelectedSeason(null);
-  //   setSelectedType(null);
   // };
+  // созависимая фильтрация
+
+  const handleBrandClick = (brand) => {
+    setSelectedBrand(brand);
+    setCurrentPage(1);
+    setSelectedCategory(null);
+    setSelectedSeason(null);
+    setSelectedType(null);
+    setPriceRange([0, 2500]);
+  };
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+    setSelectedBrand(null);
+    setSelectedSeason(null);
+    setSelectedType(null);
+    setPriceRange([0, 2500]);
+  };
+
+  const handleSeasonClick = (season) => {
+    setSelectedSeason(season);
+    setCurrentPage(1);
+    setSelectedBrand(null);
+    setSelectedCategory(null);
+    setSelectedType(null);
+    setPriceRange([0, 2500]);
+  };
+
+  const handleTypeClick = (type) => {
+    setSelectedType(type);
+    setCurrentPage(1);
+    setSelectedBrand(null);
+    setSelectedCategory(null);
+    setSelectedSeason(null);
+    setPriceRange([0, 2500]);
+  };
+
+  const handlePriceRangeChange = (range) => {
+    setPriceRange(range);
+    setCurrentPage(1);
+    setSelectedBrand(null);
+    setSelectedCategory(null);
+    setSelectedSeason(null);
+    setSelectedType(null);
+  };
 
   const resetFilters = () => {
     setSelectedBrand(null);
@@ -662,30 +662,32 @@ const CatalogPage = () => {
             <div className="flex items-center lg:items-start marker:justify-center lg:justify-between gap-4 sm:gap-10 py-8 flex-col lg:flex-row">
               <aside className="flex flex-col gap-4">
                 <Filter
-                  // items={items}
-                  // selectedBrand={selectedBrand}
-                  // selectedCategory={selectedCategory}
-                  // selectedSeason={selectedSeason}
-                  // selectedType={selectedType}
-                  // priceRange={priceRange}
-                  // handleBrandClick={handleBrandClick}
-                  // handleCategoryClick={handleCategoryClick}
-                  // handleSeasonClick={handleSeasonClick}
-                  // handleTypeClick={handleTypeClick}
-                  // onPriceRangeChange={handlePriceRangeChange}
-                  // resetFilters={resetFilters}
                   items={items}
                   selectedBrand={selectedBrand}
                   selectedCategory={selectedCategory}
                   selectedSeason={selectedSeason}
                   selectedType={selectedType}
                   priceRange={priceRange}
-                  handleBrandClick={handleFilterChange(setSelectedBrand)}
-                  handleCategoryClick={handleFilterChange(setSelectedCategory)}
-                  handleSeasonClick={handleFilterChange(setSelectedSeason)}
-                  handleTypeClick={handleFilterChange(setSelectedType)}
+                  handleBrandClick={handleBrandClick}
+                  handleCategoryClick={handleCategoryClick}
+                  handleSeasonClick={handleSeasonClick}
+                  handleTypeClick={handleTypeClick}
                   onPriceRangeChange={handlePriceRangeChange}
                   resetFilters={resetFilters}
+                  // созависимая фильтрация
+                  // items={items}
+                  // selectedBrand={selectedBrand}
+                  // selectedCategory={selectedCategory}
+                  // selectedSeason={selectedSeason}
+                  // selectedType={selectedType}
+                  // priceRange={priceRange}
+                  // handleBrandClick={handleFilterChange(setSelectedBrand)}
+                  // handleCategoryClick={handleFilterChange(setSelectedCategory)}
+                  // handleSeasonClick={handleFilterChange(setSelectedSeason)}
+                  // handleTypeClick={handleFilterChange(setSelectedType)}
+                  // onPriceRangeChange={handlePriceRangeChange}
+                  // resetFilters={resetFilters}
+                  // созависимая фильтрация
                 />
               </aside>
 

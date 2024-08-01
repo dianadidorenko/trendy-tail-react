@@ -10,7 +10,6 @@ const CarryingBagsPage = () => {
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
 
-  // Фильтруем товары по выбранной категории
   const filteredItems = useMemo(() => {
     if (!category) return items;
     return items.filter((item) => item.categoryShow === category);
