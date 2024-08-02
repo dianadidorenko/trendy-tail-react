@@ -189,7 +189,7 @@ const CatalogPage = () => {
                       <CatalogCard key={index} item={item} />
                     ))
                   ) : (
-                    <p>No items found.</p>
+                    <p>Не знайдено товар.</p>
                   )}
                 </div>
 

@@ -51,7 +51,11 @@ const CatalogCard = ({ item }) => {
         </p>
       </div>
 
-      <div className="flex gap-2 pt-0 sm:pt-2">
+      <div
+        className={`flex gap-2 pt-0 sm:pt-2  ${
+          item.categoryShow === "Ліжаки" && "flex flex-col gap-2"
+        }`}
+      >
         {item?.sizes.length > 0 &&
           item.sizes.map((size) => (
             <div key={size}>

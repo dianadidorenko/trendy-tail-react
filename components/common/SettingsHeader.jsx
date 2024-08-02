@@ -1,9 +1,10 @@
 import { Search, ShoppingBag, UserRound, UserRoundCheck } from "lucide-react";
 import Link from "next/link";
 import ThemeToggler from "../ThemeToggler";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "@/lib/context/CartContext";
 import { useUser } from "@clerk/nextjs";
+import SearchInput from "./SearchInput";
 
 const icons = [
   {
@@ -20,10 +21,26 @@ const SettingsHeader = ({ containerStyles, linkStyles }) => {
   const { itemAmount } = useContext(CartContext);
   const { user } = useUser();
 
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+
+  const toggleSearch = () => {
+    setIsSearchVisible(!isSearchVisible);
+  };
+
+  const closeSearch = () => {
+    setIsSearchVisible(false);
+  };
+
   return (
     <div className={`${containerStyles}`}>
+      {isSearchVisible && <SearchInput closeSearch={closeSearch} />}
       {icons.map((icon, index) => (
-        <Link href={icon.path} key={index} className={`${linkStyles}`}>
+        <Link
+          href={icon.path}
+          key={index}
+          className={`${linkStyles}`}
+          onClick={toggleSearch}
+        >
           <div>{icon.name}</div>
         </Link>
       ))}
