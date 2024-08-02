@@ -25,7 +25,7 @@ const AboutUs = () => {
   return (
     <section>
       <SectionHeaders mainHeader={"О нас"} />
-      <div className="container mx-auto xs:pt-[10px] pt-[70px]">
+      <div className="container mx-auto py-[70px] xs:py-[50px]">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
           <div>
             <Image

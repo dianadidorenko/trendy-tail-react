@@ -20,7 +20,7 @@ export const items = [
       { brand: "Pet Fashion" },
       { material: "100% поліестер" },
       { season: "Весна/Осінь" },
-      { color: ["bg-pink-400", "bg-gray-400"] },
+      { color: ["#dbb2b4", "#786a65"] },
     ],
     сharacteristics: [
       "модель із закритим животом;",
@@ -52,7 +52,7 @@ export const items = [
       { brand: "Pet Fashion" },
       { material: "80% котон, 20% поліестер" },
       { season: "Літо" },
-      { color: ["bg-yellow-400"] },
+      { color: ["#f3c537"] },
     ],
     сharacteristics: [
       "крій для чотирилапих красунь – із закритим животом;",
@@ -110,7 +110,7 @@ export const items = [
       { brand: "Trixie" },
       { material: "Матеріал: 95% котон, 5% еластан." },
       { season: "Літо" },
-      { color: ["bg-[#1a2840]", "bg-[#bcdb42]"] },
+      { color: ["#1a2840", "#bcdb42"] },
     ],
     material: ["95% котон, 5% еластан."],
   },
@@ -129,7 +129,7 @@ export const items = [
     info: [
       { brand: "Collar" },
       { material: "100% поліестер" },
-      { color: ["bg-black", "bg-[#cbd893]"] },
+      { color: ["black", "#cbd893"] },
     ],
   },
   {
@@ -153,7 +153,7 @@ export const items = [
       { brand: "Pet Fashion" },
       { material: "100% поліестер" },
       { season: "Весна/Осінь" },
-      { color: ["bg-[#3b3b3f]", "bg-[#e1397b]"] },
+      { color: ["#3b3b3f", "#e1397b"] },
     ],
     сharacteristics: [
       "теплий приємний на дотик трикотаж;",
@@ -184,7 +184,7 @@ export const items = [
     info: [
       { brand: "Harley & Cho" },
       { material: "100% поліестер" },
-      { color: ["bg-[#e6ded9]"] },
+      { color: ["#e6ded9"] },
     ],
     сharacteristics: [
       "стильний сучасний дизайн;",
@@ -212,7 +212,7 @@ export const items = [
     info: [
       { brand: "Harley & Cho" },
       { material: "100% поліестер" },
-      { color: ["bg-[#ca6630]", "bg-[#55545b]"] },
+      { color: ["#ca6630", "#55545b"] },
     ],
     сharacteristics: [
       "міцність та довговічність;",
@@ -240,7 +240,7 @@ export const items = [
       { brand: "Trixie" },
       { material: "Матеріал: 95% котон, 5% еластан." },
       { season: "Літо" },
-      { color: ["bg-[#1a2840]", "bg-[#a7d514]"] },
+      { color: ["#1a2840", "#a7d514"] },
     ],
     material: ["95% котон, 5% еластан."],
   },
@@ -265,7 +265,7 @@ export const items = [
       { brand: "Pet Fashion" },
       { material: "80% котон, 20% поліестер" },
       { season: "Зима" },
-      { color: ["bg-[#a7a1a0]", "bg-[#fdfbf7]"] },
+      { color: ["#a7a1a0", "#fdfbf7"] },
     ],
     сharacteristics: [
       "оригінальне сполучення фактур та кольорів;",
@@ -297,7 +297,7 @@ export const items = [
       { brand: "Pet Fashion" },
       { material: "Трикотаж" },
       { season: "Весна/Осінь" },
-      { color: ["bg-[#d41c2e]"] },
+      { color: ["#d41c2e"] },
     ],
     сharacteristics: [
       "стильна базова річ;",
@@ -329,7 +329,7 @@ export const items = [
       { brand: "Pet Fashion" },
       { material: "Трикотаж" },
       { season: "Весна/Осінь" },
-      { color: ["bg-[#312d2d]"] },
+      { color: ["#312d2d"] },
     ],
     сharacteristics: [
       "стильна базова річ;",
@@ -359,7 +359,7 @@ export const items = [
     info: [
       { brand: "Harley & Cho" },
       { material: "100% поліестер" },
-      { color: ["bg-[#37496c]"] },
+      { color: ["#37496c"] },
     ],
     сharacteristics: [
       "стильний сучасний дизайн;",
@@ -393,7 +393,7 @@ export const items = [
     info: [
       { brand: "Harley & Cho" },
       { material: "100% поліестер" },
-      { color: ["bg-[#2f2f2f]", "bg-[#ccc6c4]"] },
+      { color: ["#2f2f2f", "bccc6c4"] },
     ],
     сharacteristics: [
       "y згорнутому вигляді 52х42х18 см (внутрішне місце 32х23 см). У розгорнутому вигляді 77х66х10 см;",
@@ -427,7 +427,7 @@ export const items = [
       { material: "100% поліестер" },
       { season: "Зима" },
       {
-        color: ["bg-[#dadf25]", "bg-white", "bg-[#52b0db]", "bg-[#ea6481]"],
+        color: ["#dadf25", "white", "#52b0db", "#ea6481"],
       },
     ],
     сharacteristics: [
@@ -454,7 +454,7 @@ export const items = [
     info: [
       { brand: "Collar" },
       { material: "100% поліестер" },
-      { color: ["bg-[#4b535e]"] },
+      { color: ["#4b535e"] },
     ],
     сharacteristics: [
       "зовні сумка оформлена плащовою тканиною, тому легко миється і швидко сохне;",
@@ -482,7 +482,7 @@ export const items = [
     info: [
       { brand: "Collar" },
       { material: "100% поліестер" },
-      { color: ["bg-[#0e273f]"] },
+      { color: ["#0e273f"] },
     ],
   },
   {
@@ -505,7 +505,7 @@ export const items = [
     info: [
       { brand: "Trixie" },
       { material: "100% поліестер." },
-      { color: ["bg-[#e8cfc9]", "bg-[#92b4b6]"] },
+      { color: ["#e8cfc9", "#92b4b6"] },
     ],
     сharacteristics: [
       "захистить меблі від шерсті та забруднень;",

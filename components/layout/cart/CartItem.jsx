@@ -7,10 +7,12 @@ import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 import SectionHeaders from "@/components/common/SectionHeaders";
 import Loader from "@/components/Loader";
 import { CartContext } from "@/lib/context/CartContext";
+import { fadeIn } from "@/lib/variants";
 
 const CartItem = () => {
   const router = useRouter();
@@ -72,23 +74,27 @@ const CartItem = () => {
 
     if (valid) {
       try {
-        const clientInfo = `Клієнт - ${name}, ${surname}, ${email}, ${chosenRegion}, ${chosenCity}, ${chosenWarehouse}, загальна сума замовлення ${cartTotal} ₴`;
+        const clientInfo = `Клієнт - ${name}, ${surname}, ${email}, ${chosenRegion}, ${chosenCity}, ${chosenWarehouse}`;
 
         const cartInfo = cart.map(
           (item) =>
             `Товар - [${item.name}, кількість - ${item.amount} шт., розмір - ${item.size}, ${item.price} ₴]`
         );
 
+        const total = `Загальна сума замовлення - ${cartTotal} ₴`;
+
         const data = {
           formType: "form2",
           clientInfo,
           cartInfo,
+          total,
         };
 
         await axios.post("/api/sendMessage", data);
         toast.success("Повідомлення надіслано!");
 
-        router.push("/thank-you");
+        const encodedData = encodeURIComponent(JSON.stringify(data));
+        router.push(`/thank-you?order=${encodedData}`);
         clearCart();
       } catch (error) {
         console.error("Помилка відправки повідомлення:", error);
@@ -193,7 +199,13 @@ const CartItem = () => {
       <div>
         <SectionHeaders mainHeader={"Замовлення"} />
         <div className="flex flex-col items-center justify-center mb-8">
-          <div className="flex items-center justify-center gap-2 text-center">
+          <motion.div
+            className="flex items-center justify-center gap-2 text-center"
+            variants={fadeIn("up", 0.4)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <Image
               src={"/cart/paw-icon.svg"}
               width={30}
@@ -211,15 +223,27 @@ const CartItem = () => {
               alt="Лапа"
               className="xs:hidden sm:flex"
             />
-          </div>
-          <p className="text-[14px] max-w-[220px] sm:max-w-none text-center">
+          </motion.div>
+          <motion.p
+            className="text-[15px] max-w-[220px] sm:max-w-none text-center"
+            variants={fadeIn("up", 0.8)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             Заповніть наступні поля для оформлення вашого замовлення
-          </p>
+          </motion.p>
         </div>
       </div>
 
       <div className="flex flex-col items-center sm:items-start sm:flex-row gap-10 lg:gap-20 px-5 lg:px-20 justify-center">
-        <div className="flex flex-col max-w-[350px]">
+        <motion.div
+          className="flex flex-col max-w-[350px]"
+          variants={fadeIn("up", 0.2)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true, amount: 0.4 }}
+        >
           <h2 className="uppercase border-b-gray-400 border-b-2 pb-1 text-primary dark:text-white/80">
             Ваші дані
           </h2>
@@ -228,7 +252,7 @@ const CartItem = () => {
               <input type="hidden" name="formType" value="form2" />
               <input
                 type="text"
-                placeholder="Trendy"
+                placeholder="Ім'я"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="bg-white border border-gray-300 p-2 rounded-md"
@@ -236,7 +260,7 @@ const CartItem = () => {
               />
               <input
                 type="text"
-                placeholder="Brendy"
+                placeholder="Прізвище"
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
                 className="bg-white border border-gray-300 p-2 rounded-md"
@@ -341,16 +365,22 @@ const CartItem = () => {
 
               <button
                 type="submit"
-                className="mt-4 order-button flex items-center justify-center gap-2 text-base max-w-[300px]"
+                className="mt-4 order-button flex items-center justify-center gap-2 text-[15px] max-w-[300px]"
               >
                 Сплатити
                 <span>{cartTotal} ₴</span>
               </button>
             </div>
           </form>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-6 text-md">
+        <motion.div
+          className="flex flex-col gap-6 text-md"
+          variants={fadeIn("up", 0.3)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true, amount: 0.6 }}
+        >
           <h2 className="uppercase border-b-gray-400 border-b-2 pb-1 text-primary dark:text-white/80">
             Ваше Замовлення
           </h2>
@@ -376,7 +406,7 @@ const CartItem = () => {
 
               <div>
                 <div>
-                  <div className="text-[13px] flex flex-col gap-2">
+                  <div className="text-[15px] flex flex-col gap-2">
                     <p className="font-bold">{cartItem.name}</p>
                     <p className="italic">
                       Розмір: <span>{cartItem.size}</span>
@@ -425,7 +455,7 @@ const CartItem = () => {
             загальною сумою: {cartTotal}
             <span className="text-[16px]">₴</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

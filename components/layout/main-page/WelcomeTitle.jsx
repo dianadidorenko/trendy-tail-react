@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/variants";
 
 import CustomButton from "@/components/elements/Button";
+import { fadeIn } from "@/lib/variants";
 
 export default function WelcomeTitle() {
   return (

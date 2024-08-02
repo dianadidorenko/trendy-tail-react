@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
-import { IoMdCloseCircleOutline } from "react-icons/io";
 import Modal from "react-modal";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 import { CartContext } from "@/lib/context/CartContext";
-import Link from "next/link";
+import { fadeIn } from "@/lib/variants";
 
 Modal.setAppElement("body");
 
@@ -62,8 +63,18 @@ const ProductDetails = ({
     setTotalPrice(Number(selectedPrice * quantity));
   }, [selectedPrice, quantity]);
 
+  // productInfo.map((info) => {
+  //   info.color.map((color) => console.log(color));
+  // });
+
   return (
-    <div className="flex flex-col gap-4 px-2 font-poppins">
+    <motion.div
+      className="flex flex-col gap-4 px-2 font-poppins"
+      variants={fadeIn("up", 0.2)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="flex flex-col">
         <h1 className="font-orelegaOne text-primary dark:text-white text-[22px]">
           {itemName.name}
@@ -97,12 +108,13 @@ const ProductDetails = ({
               )}
 
               {info.color && (
-                <div className="flex items-center gap-2" key={index}>
+                <div className="flex items-center gap-2">
                   <p>Колір:</p>
                   {info.color.map((colorSpecific, index) => (
                     <div
                       key={index}
                       className={`${colorSpecific} w-[30px] h-[30px] rounded-lg border border-gray-200 dark:border-white`}
+                      style={{ backgroundColor: colorSpecific }}
                     />
                   ))}
                 </div>
@@ -208,7 +220,7 @@ const ProductDetails = ({
                     width={150}
                     height={150}
                     alt={itemName.name}
-                    className="rounded-xl max-w-[110px] max-h-[110px] md:max-w-[150px] md:ma-h-[150px]"
+                    className="rounded-xl max-w-[110px] max-h-[110px] md:max-w-[150px] md:max-h-[150px]"
                   />
                 </div>
                 <div className="flex flex-col gap-1 text-[13px] text-center md:text-[16px]">
@@ -236,7 +248,7 @@ const ProductDetails = ({
           </Modal>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

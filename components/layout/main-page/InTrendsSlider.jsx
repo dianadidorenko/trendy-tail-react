@@ -30,9 +30,15 @@ const InTrendsSlider = ({ items }) => {
     <section>
       <SectionHeaders mainHeader={"В тренді"} />
 
-      <div className="container mx-auto relative">
+      <motion.div
+        className="container mx-auto relative py-[70px] xs:py-[50px]"
+        variants={fadeIn("up", 0.4)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <Swiper
-          className="h-[470px] max-w-[1100px] mx-auto"
+          className="h-[450px] max-w-[1100px] mx-auto"
           slidesPerView={1}
           breakpoints={{
             640: {
@@ -89,7 +95,7 @@ const InTrendsSlider = ({ items }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
+      </motion.div>
     </section>
   );
 };

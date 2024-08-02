@@ -26,7 +26,7 @@ export const metadata = {
   description: "Trendy Tail Store - Ecommerce",
 };
 
-export default function RootLayout({ children }) {
+function RootLayout({ children }) {
   return (
     <CartProvider>
       <html lang="en" suppressHydrationWarning>
@@ -46,3 +46,5 @@ export default function RootLayout({ children }) {
     </CartProvider>
   );
 }
+
+export default RootLayout;

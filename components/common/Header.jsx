@@ -18,7 +18,7 @@ export default function Header() {
         " flex items-center py-3 justify-between px-6 max-[390px]:px-3 shadow-lg"
       }`}
     >
-      <div className="flex items-center gap-10 xs:gap-4">
+      <div className="flex items-center gap-6 lg:gap-8">
         <Link href={"/"}>
           <Image
             src={"/logo.svg"}

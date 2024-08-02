@@ -1,14 +1,23 @@
 "use client";
 
-import SectionHeaders from "@/components/common/SectionHeaders";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+import SectionHeaders from "@/components/common/SectionHeaders";
+import { fadeIn } from "@/lib/variants";
 
 const CatalogNav = () => {
   return (
-    <section className="pt-[50px] lg:pt-[70px]">
+    <section>
       <SectionHeaders mainHeader={"Каталог"} />
-      <div className="container mx-auto my-[50px]">
+      <motion.div
+        className="container mx-auto py-[70px] xs:py-[50px]"
+        variants={fadeIn("up", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex items-center justify-center hover:animate-swipe transition-all duration-300">
             <Link href={"/cloth?category=Одяг"} className="relative">
@@ -98,7 +107,7 @@ const CatalogNav = () => {
             </Link>
           </div> */}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -16,17 +16,23 @@ const PagesNav = ({ items }) => {
           <p>Головна</p>
           <ChevronRight
             size={18}
-            className={`${itemName ? "" : "text-primary dark:text-white/90"}`}
+            className={`${
+              itemName || pathName?.categoryShow
+                ? "text-primary/50 dark:text-white/50"
+                : "text-primary dark:text-white/90"
+            }`}
           />
         </div>
       </Link>
 
-      {itemName?.name ? (
+      {itemName?.name || pathName?.categoryShow ? (
         <div className="flex items-center gap-1">
           <Link href="/catalog">
             <p
               className={`${
-                itemName ? "text-primary/50 dark:text-white/50" : "text-primary"
+                itemName || pathName?.categoryShow
+                  ? "text-primary/50 dark:text-white/50"
+                  : "text-primary"
               }`}
             >
               Каталог
@@ -36,7 +42,9 @@ const PagesNav = ({ items }) => {
             <ChevronRight
               size={18}
               className={`${
-                itemName ? "text-primary dark:text-white/90" : "text-primary/50"
+                itemName || pathName?.categoryShow
+                  ? "text-primary dark:text-white/90"
+                  : "text-primary/50"
               }`}
             />
             <p className="text-primary dark:text-white/90">{itemName?.name}</p>
@@ -50,20 +58,8 @@ const PagesNav = ({ items }) => {
 
       {pathName?.categoryShow && (
         <div className="flex items-center gap-1">
-          <div className="flex items-center gap-1">
-            <ChevronRight
-              size={18}
-              className={`${
-                itemName ? "text-primary dark:text-white/90" : "text-primary/50"
-              }`}
-            />
-          </div>
           <Link href={`/${pathName?.category}`}>
-            <p
-              className={`${
-                itemName ? "text-primary/50 dark:text-white/50" : "text-primary"
-              }`}
-            >
+            <p className="text-primary dark:text-white/90">
               {pathName?.categoryShow}
             </p>
           </Link>
