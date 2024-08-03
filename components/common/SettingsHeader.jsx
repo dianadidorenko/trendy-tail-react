@@ -6,17 +6,6 @@ import { CartContext } from "@/lib/context/CartContext";
 import { useUser } from "@clerk/nextjs";
 import SearchInput from "./SearchInput";
 
-const icons = [
-  {
-    path: "",
-    name: <Search size={20} />,
-  },
-  {
-    path: "",
-    name: <ThemeToggler />,
-  },
-];
-
 const SettingsHeader = ({ containerStyles, linkStyles }) => {
   const { itemAmount } = useContext(CartContext);
   const { user } = useUser();
@@ -34,16 +23,14 @@ const SettingsHeader = ({ containerStyles, linkStyles }) => {
   return (
     <div className={`${containerStyles}`}>
       {isSearchVisible && <SearchInput closeSearch={closeSearch} />}
-      {icons.map((icon, index) => (
-        <Link
-          href={icon.path}
-          key={index}
-          className={`${linkStyles}`}
-          onClick={toggleSearch}
-        >
-          <div>{icon.name}</div>
-        </Link>
-      ))}
+
+      <Link href={""} className={`${linkStyles}`} onClick={toggleSearch}>
+        <Search size={20} />
+      </Link>
+
+      <Link href={""} className={`${linkStyles}`}>
+        <ThemeToggler />
+      </Link>
 
       {!user ? (
         <Link href={"/sign-in"} className={`${linkStyles}`}>
