@@ -83,7 +83,7 @@ export const items = [
     info: [
       { brand: "Harley & Cho" },
       { material: "100% поліестер" },
-      { color: ["bg-[#b29f8e]"] },
+      { color: ["#b29f8e"] },
     ],
     сharacteristics: [
       "вишуканий дизайн і модний колір;",
