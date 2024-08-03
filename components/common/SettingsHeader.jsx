@@ -8,7 +8,7 @@ import SearchInput from "./SearchInput";
 
 const icons = [
   {
-    path: "/",
+    path: "",
     name: <Search size={20} />,
   },
   {

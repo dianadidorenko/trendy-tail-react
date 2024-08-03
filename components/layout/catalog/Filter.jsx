@@ -73,13 +73,13 @@ const Filter = ({
     <>
       {isMobile ? (
         <div
-          className={`flex flex-wrap gap-y-3 sm:gap-y-4 sm:border border-gray-200 p-1 rounded-[10px] w-full xsSm:grid xsSm:grid-cols-5 ${
-            (paramsCategory === "Ліжаки" ||
-              paramsCategory === "Сумки-переноски") &&
-            "xsSm:grid-cols-3 "
-          } ${
-            paramsCategory === "Аксесуари" && "xsSm:grid-cols-4 "
-          } xs:gap-x-6 xs:justify-center xsSm:flex-row`}
+          className={`${
+            paramsCategory === "Ліжаки" || paramsCategory === "Сумки-переноски"
+              ? "xsSm:grid-cols-3"
+              : paramsCategory === "Аксесуари"
+              ? "xsSm:grid-cols-4"
+              : "xsSm:grid-cols-5"
+          } flex flex-wrap gap-y-3 sm:gap-y-4 sm:border border-gray-200 p-1 rounded-[10px] w-full xsSm:grid xs:gap-x-6 xs:justify-center xsSm:flex-row`}
         >
           <div className="flex flex-col gap-2 justify-center items-center">
             <select

@@ -9,23 +9,23 @@
 //   аксесуари: "accessories",
 // };
 
-// // Функция для капитализации первой буквы строки
-// const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
 // const SearchInput = ({ closeSearch }) => {
 //   const [query, setQuery] = useState("");
 //   const [results, setResults] = useState([]);
+//   const [categories, setCategories] = useState([]);
+//   const [noResults, setNoResults] = useState(false);
 //   const searchContainerRef = useRef(null);
 //   const router = useRouter();
 
 //   const getCategoryMapping = () => {
 //     const categories = new Set();
-//     items.forEach((item) => categories.add(item.categoryShow.toLowerCase()));
+//     items.forEach((item) => categories.add(item.categoryShow));
 
 //     const categoryMapping = {};
 //     categories.forEach((category) => {
-//       const categoryPath = categoryTranslation[category] || category;
-//       categoryMapping[category] = `/category/${categoryPath}`;
+//       const categoryPath =
+//         categoryTranslation[category.toLowerCase()] || category.toLowerCase();
+//       categoryMapping[category] = `${categoryPath}`;
 //     });
 
 //     return categoryMapping;
@@ -45,8 +45,16 @@
 //           item.type?.toLowerCase().includes(value)
 //       );
 //       setResults(filteredResults);
+//       setNoResults(filteredResults.length === 0);
+
+//       const filteredCategories = Object.keys(categoryMapping).filter(
+//         (category) => category.toLowerCase().includes(value)
+//       );
+//       setCategories(filteredCategories);
 //     } else {
 //       setResults([]);
+//       setNoResults(false);
+//       setCategories([]);
 //     }
 //   };
 
@@ -60,7 +68,6 @@
 //       const lowerCaseQuery = query.toLowerCase();
 //       const translatedCategory = categoryTranslation[lowerCaseQuery];
 //       if (translatedCategory) {
-//         // Находим оригинальное значение категории из данных
 //         const originalCategory = items.find(
 //           (item) => item.categoryShow.toLowerCase() === lowerCaseQuery
 //         )?.categoryShow;
@@ -83,7 +90,6 @@
 //     }
 //   };
 
-//   // Обработчик кликов вне компонента
 //   const handleClickOutside = (event) => {
 //     if (
 //       searchContainerRef.current &&
@@ -101,23 +107,54 @@
 //   }, []);
 
 //   return (
-//     <div className="search-container p-1 rounded-[10px]">
-//       <input
-//         type="text"
-//         value={query}
-//         onChange={handleSearch}
-//         placeholder="Поиск товара..."
-//         className="search-input max-w-[120px]"
-//       />
-//       <button onClick={handleIconClick} className="search-icon">
-//         🔍
-//       </button>
-//       <ul className="search-results">
+//     <div
+//       className="search-container w-full flex flex-col items-center justify-center p-1 bg-white dark:bg-accent border border-gray-300 shadow-lg"
+//       ref={searchContainerRef}
+//     >
+//       <div className="flex mb-2">
+//         <input
+//           type="text"
+//           value={query}
+//           onChange={handleSearch}
+//           placeholder="Пошук товара..."
+//           className="search-input max-w-[150px] p-2 border border-gray-300 rounded-l-md text-primary placeholder:text-primary placeholder:text-[15px] dark:bg-white/80"
+//         />
+//         <button
+//           onClick={handleIconClick}
+//           className="search-icon p-2 border border-gray-300 bg-gray-200 rounded-r-md"
+//         >
+//           🔍
+//         </button>
+//       </div>
+//       <ul className="search-results w-full max-h-60 overflow-y-auto bg-white dark:bg-accent rounded-md shadow-lg">
+//         {categories.map((category) => (
+//           <li
+//             key={category}
+//             className="p-2 hover:bg-gray-100 hover:dark:bg-gray-500 cursor-pointer"
+//             onClick={() => {
+//               router.push(
+//                 `${categoryMapping[category]}?category=${encodeURIComponent(
+//                   category
+//                 )}`
+//               );
+//               closeSearch();
+//             }}
+//           >
+//             {category}
+//           </li>
+//         ))}
 //         {results.map((item) => (
-//           <li key={item.id} onClick={() => handleResultClick(item.urlName)}>
+//           <li
+//             key={item.id}
+//             className="p-2 hover:bg-gray-100 hover:dark:bg-gray-500 cursor-pointer"
+//             onClick={() => handleResultClick(item.urlName)}
+//           >
 //             {item.name}
 //           </li>
 //         ))}
+//         {noResults && query.length > 0 && (
+//           <li className="p-2 text-gray-100">Нічого не знайдено</li>
+//         )}
 //       </ul>
 //     </div>
 //   );
@@ -136,24 +173,25 @@ const categoryTranslation = {
   аксесуари: "accessories",
 };
 
-// Функция для капитализации первой буквы строки
-const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
 const SearchInput = ({ closeSearch }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [noResults, setNoResults] = useState(false);
   const searchContainerRef = useRef(null);
   const router = useRouter();
 
-  // Функция для получения категории и пути
   const getCategoryMapping = () => {
     const categories = new Set();
-    items.forEach((item) => categories.add(item.categoryShow.toLowerCase()));
+    items.forEach((item) => categories.add(item.categoryShow));
 
     const categoryMapping = {};
     categories.forEach((category) => {
-      const categoryPath = categoryTranslation[category] || category;
-      categoryMapping[category] = `/category/${categoryPath}`;
+      const categoryPath =
+        categoryTranslation[category.toLowerCase()] ||
+        categoryTranslation[category] ||
+        category.toLowerCase();
+      categoryMapping[category] = `${categoryPath}`;
     });
 
     return categoryMapping;
@@ -161,7 +199,6 @@ const SearchInput = ({ closeSearch }) => {
 
   const categoryMapping = getCategoryMapping();
 
-  // Функция для обработки изменений в инпуте
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setQuery(value);
@@ -174,18 +211,32 @@ const SearchInput = ({ closeSearch }) => {
           item.type?.toLowerCase().includes(value)
       );
       setResults(filteredResults);
+      setNoResults(filteredResults.length === 0);
+
+      const filteredCategories = Object.keys(categoryMapping).filter(
+        (category) => category.toLowerCase().includes(value)
+      );
+      setCategories(filteredCategories);
     } else {
       setResults([]);
+      setNoResults(false);
+      setCategories([]);
     }
   };
 
-  // Функция для обработки клика на результат
   const handleResultClick = (urlName) => {
     router.push(`/products/${urlName}`);
     closeSearch();
   };
 
-  // Функция для обработки клика на иконку поиска
+  const handleCategoryClick = (category) => {
+    const categoryPath = categoryMapping[category];
+    if (categoryPath) {
+      router.push(`/${categoryPath}?category=${encodeURIComponent(category)}`);
+      closeSearch();
+    }
+  };
+
   const handleIconClick = () => {
     if (query.length > 0) {
       const lowerCaseQuery = query.toLowerCase();
@@ -213,7 +264,6 @@ const SearchInput = ({ closeSearch }) => {
     }
   };
 
-  // Обработчик кликов вне компонента
   const handleClickOutside = (event) => {
     if (
       searchContainerRef.current &&
@@ -232,25 +282,46 @@ const SearchInput = ({ closeSearch }) => {
 
   return (
     <div
-      className="search-container p-1 rounded-[10px]"
+      className="search-container w-full flex flex-col items-center justify-center p-1 bg-white dark:bg-accent border border-gray-300 shadow-lg"
       ref={searchContainerRef}
     >
-      <input
-        type="text"
-        value={query}
-        onChange={handleSearch}
-        placeholder="Поиск товара..."
-        className="search-input max-w-[120px]"
-      />
-      <button onClick={handleIconClick} className="search-icon">
-        🔍
-      </button>
-      <ul className="search-results">
+      <div className="flex my-1">
+        <input
+          type="text"
+          value={query}
+          onChange={handleSearch}
+          placeholder="Пошук товара..."
+          className="search-input max-w-[150px] p-2 border border-gray-300 rounded-l-md text-primary placeholder:text-primary placeholder:text-[15px] dark:bg-white/80"
+        />
+        <button
+          onClick={handleIconClick}
+          className="search-icon p-2 border border-gray-300 bg-gray-200 rounded-r-md"
+        >
+          🔍
+        </button>
+      </div>
+      <ul className="search-results w-full max-h-60 overflow-y-auto bg-white dark:bg-accent rounded-md shadow-lg">
+        {categories.map((category) => (
+          <li
+            key={category}
+            className="p-2 hover:bg-gray-100 hover:dark:bg-gray-500 cursor-pointer"
+            onClick={() => handleCategoryClick(category)}
+          >
+            {category}
+          </li>
+        ))}
         {results.map((item) => (
-          <li key={item.id} onClick={() => handleResultClick(item.urlName)}>
+          <li
+            key={item.id}
+            className="p-2 hover:bg-gray-100 hover:dark:bg-gray-500 cursor-pointer"
+            onClick={() => handleResultClick(item.urlName)}
+          >
             {item.name}
           </li>
         ))}
+        {noResults && query.length > 0 && (
+          <li className="p-2 text-gray-500">Нічого не знайдено</li>
+        )}
       </ul>
     </div>
   );

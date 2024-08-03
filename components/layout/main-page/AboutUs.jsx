@@ -2,7 +2,7 @@
 
 import SectionHeaders from "@/components/common/SectionHeaders";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const AboutUs = () => {
   const aboutUsText =
@@ -21,6 +21,7 @@ const AboutUs = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
 
   return (
     <section>

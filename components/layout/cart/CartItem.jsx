@@ -236,7 +236,7 @@ const CartItem = () => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center sm:items-start sm:flex-row gap-10 lg:gap-20 px-5 lg:px-20 justify-center">
+      <div className="flex flex-col-reverse items-center sm:items-start sm:flex-row gap-10 lg:gap-20 px-5 lg:px-20 justify-center">
         <motion.div
           className="flex flex-col max-w-[350px]"
           variants={fadeIn("up", 0.2)}
@@ -255,7 +255,7 @@ const CartItem = () => {
                 placeholder="Ім'я"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="bg-white border border-gray-300 p-2 rounded-md"
+                className="bg-white border border-gray-300 p-2 rounded-md placeholder:text-primary text-primary placeholder:text-[14px]"
                 required
               />
               <input
@@ -263,7 +263,7 @@ const CartItem = () => {
                 placeholder="Прізвище"
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
-                className="bg-white border border-gray-300 p-2 rounded-md"
+                className="bg-white border border-gray-300 p-2 rounded-md placeholder:text-primary text-primary placeholder:dark:text-primary placeholder:text-[14px]"
                 required
               />
               <input
@@ -272,7 +272,7 @@ const CartItem = () => {
                 value={phone}
                 name="phone"
                 onChange={(e) => setPhone(e.target.value)}
-                className="bg-white border border-gray-300 p-2 rounded-md"
+                className="bg-white border border-gray-300 p-2 rounded-md placeholder:text-primary text-primary placeholder:text-[14px]"
                 required
               />
               <input
@@ -281,7 +281,7 @@ const CartItem = () => {
                 value={email}
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-white border border-gray-300 p-2 rounded-md"
+                className="bg-white border border-gray-300 p-2 rounded-md placeholder:text-primary text-primary placeholder:text-[14px]"
                 required
               />
             </div>
@@ -303,9 +303,9 @@ const CartItem = () => {
                   onChange={(e) =>
                     handleRegionChange(JSON.parse(e.target.value))
                   }
-                  className="text-[12px] text-gray-400"
+                  className="text-[14px] text-primary bg-white border border-gray-300 p-2 rounded-md"
                 >
-                  <option value="">Выберите область</option>
+                  <option value="">Оберіть область</option>
                   {regions.map((region) => (
                     <option key={region.Ref} value={JSON.stringify(region)}>
                       {region.Description}
@@ -315,9 +315,11 @@ const CartItem = () => {
 
                 <select
                   onChange={(e) => handleCityChange(JSON.parse(e.target.value))}
-                  className="text-[12px] text-gray-400"
+                  value={selectedCity || ""}
+                  disabled={!selectedRegion}
+                  className="text-[14px] text-primary bg-white border border-gray-300 p-2 rounded-md"
                 >
-                  <option value="">Выберите город</option>
+                  <option value="">Оберіть місто</option>
                   {cities.map((city) => (
                     <option key={city.Ref} value={JSON.stringify(city)}>
                       {city.Description}
@@ -329,10 +331,10 @@ const CartItem = () => {
                   onChange={handleWarehouseChange}
                   value={selectedWarehouse || ""}
                   disabled={!selectedCity}
-                  className="text-[12px] text-gray-400"
+                  className="text-[14px] text-primary bg-white border border-gray-300 p-2 rounded-md"
                 >
                   <option value="" disabled>
-                    Выберите склад
+                    Оберіть склад
                   </option>
                   {warehouses.map((warehouse) => (
                     <option key={warehouse.Ref} value={warehouse.Ref}>
@@ -386,7 +388,7 @@ const CartItem = () => {
           </h2>
           {cart.map((cartItem, index) => (
             <div
-              className="flex gap-3 border-2 px-12 py-2 md:px-6 md:py-6 border-gray-200 order-block relative shadow-xl dark:shadow-white/30"
+              className="flex gap-3 border-2 px-12 py-4 md:px-6 md:py-6 border-gray-200 order-block relative shadow-xl dark:shadow-white/30"
               key={index}
             >
               <HiTrash
